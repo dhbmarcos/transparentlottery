@@ -4,7 +4,7 @@ title: Transparent Lottery
 ---
 
 <p align="center">
-  <img src="logo-transparent.png" alt="Transparent Lottery Logo" width="300">
+  <img src="transparent-lottery.png" alt="Transparent Lottery Logo" width="300">
 </p>
 
 # Transparent Lottery
