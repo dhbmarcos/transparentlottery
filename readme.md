@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo-transparent.png" alt="Transparent Lottery Logo" width="300">
+</p>
+
 # Transparent Lottery
 
 Generation of pseudo-random numbers based on a public algorithm, using hashes from the Bitcoin network.
