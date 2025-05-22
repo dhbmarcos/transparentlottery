@@ -17,7 +17,7 @@ With this innovation, betting games, raffles, and prizes can benefit from the tr
 
 To generate random data for forming numbers, the hash of a specific Bitcoin block is obtained. The block number is the draw number. Since a Bitcoin block is generated, on average, every 10 minutes, a draw can also be generated, on average, every 10 minutes.
 
-When obtaining the block hash — which is a 256-bit hash, or 64 hexadecimal characters from 0 to F — this hash is converted into a decimal number. The conversion must be performed using all hexadecimal characters at once. This conversion generates up to 78 digits from 0 to 9. For number generation, only the leftmost 32 digits are considered. If 35 digits are generated, a zero is added as the 36th digit. If fewer than 35 digits are generated, the draw is canceled.
+When obtaining the block hash — which is a 256-bit hash, or 64 hexadecimal characters from 0 to F — this hash is converted into a decimal number. The conversion must be performed using all hexadecimal characters at once. This conversion generates up to 78 digits from 0 to 9. For number generation, only the leftmost 36 digits are considered. If 35 digits are generated, a zero is added as the 36th digit. If fewer than 35 digits are generated, the draw is canceled.
 
 ### Steps:
 
