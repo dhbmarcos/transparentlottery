@@ -2,45 +2,145 @@
   <img src="transparent-lottery.png" alt="Transparent Lottery Logo" width="300">
 </p>
 
+
 # Transparent Lottery
 
-Generation of pseudo-random numbers based on a public algorithm, using hashes from the Bitcoin network.
-
-With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that the results cannot be manipulated. With this algorithm, anyone can manually perform the operation, making the process transparent.
+Generation of pseudo-random numbers using a public algorithm based on Bitcoin network hashes.  
+With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that results cannot be manipulated. With this algorithm, anyone can manually perform the operation, making the process transparent.
 
 ## Number Drawing
 
-To generate random data for forming numbers, the hash of a specific Bitcoin block is obtained. The block number is the draw number. Since a Bitcoin block is generated, on average, every 10 minutes, a draw can also be generated, on average, every 10 minutes.
+To generate random data for number formation, the hash of a specific Bitcoin block will be used. The block number is the draw number. Since a Bitcoin block is generated on average every 10 minutes, a draw can also be generated at the same interval. Upon obtaining the block hash— a 256-bit hash or 64 hexadecimal characters from 0 to F — it is converted to a decimal number. The conversion must consider all hexadecimal characters at once. This process yields up to 78 digits from 0 to 9. For the draw, only the 36 rightmost digits are used, since there can be a variable number of leading zeros depending on mining difficulty.
 
-When obtaining the block hash — which is a 256-bit hash, or 64 hexadecimal characters from 0 to F — this hash is converted into a decimal number. The conversion must be performed using all hexadecimal characters at once. This conversion generates up to 78 digits from 0 to 9. For number generation, only the leftmost 36 digits are considered. If 35 digits are generated, a zero is added as the 36th digit. If fewer than 35 digits are generated, the draw is canceled.
+### Summary process:
 
-### Steps:
+1. Define the block number  
+2. Extract the block hash  
+3. Convert to decimal  
+4. Extract 36 decimal digits
 
-1. Define the block number;
-2. Extract the block hash;
-3. Convert to decimal;
-4. Discard the draw if fewer than 35 digits are obtained;
-5. Add a leading zero if exactly 35 digits are obtained.
+---
+
+### Defining the Block Number
+
+Choose a block number greater than the current Bitcoin block height, ensuring all bets can be placed in time.
+
+### Extracting the Block Hash
+
+Obtain the hash of the chosen block after its first confirmation, since players will be able to extract it after that point. The value must be a 256-bit hash (64 hexadecimal digits).
+
+**Example**:  
+For block 0, the hash is:
+
+```
+000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+```
+
+### Conversion to Decimal
+
+After obtaining the hash, convert it to a decimal (base 10) value. The conversion must consider all hash digits simultaneously.
+
+The hexadecimal representation uses digits from 0 to F, corresponding to values from 0 to 15. In decimal representation, each hexadecimal digit is converted using:
+
+```latex
+$$
+d = \sum_{p=0}^{63} h_p 	imes 16^p
+$$
+```
+
+Where:
+- `p` is the digit position, from right to left, starting at 0 to 63  
+- `h_p` is the decimal value of the hexadecimal digit, as shown below:
+
+| Hexadecimal | Decimal |
+|-------------|---------|
+| 0           | 0       |
+| 1           | 1       |
+| 2           | 2       |
+| 3           | 3       |
+| 4           | 4       |
+| 5           | 5       |
+| 6           | 6       |
+| 7           | 7       |
+| 8           | 8       |
+| 9           | 9       |
+| A           | 10      |
+| B           | 11      |
+| C           | 12      |
+| D           | 13      |
+| E           | 14      |
+| F           | 15      |
+
+**Expanded formula**:
+
+```latex
+$$
+d = h_0 	imes 16^0 + h_1 	imes 16^1 + \dots + h_{63} 	imes 16^{63}
+$$
+```
+
+**Example**:  
+For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, the resulting decimal is:
+
+```
+170063117907496993344802296311112793286231433463274784309528897279
+```
+
+---
+
+### Extracting 36 Decimal Digits
+
+After conversion, extract the 36 rightmost digits (from right to left):
+
+**Example**:  
+```
+112793286231433463274784309528897279
+```
+
+---
 
 ## Generating Draw Results
 
-After generating the draw, the numbers are extracted using the process described above. The drawn numbers can be interpreted in the following ways:
+From the resulting number, draw results can be generated using the following patterns:
 
-- **Nonets**: 4 numbers consisting of 9 digits, from 0 to 999,999,999;
-- **Sextets**: 6 numbers consisting of 6 digits, from 0 to 999,999;
-- **Quartets**: 9 numbers consisting of 4 digits, from 0 to 9,999;
-- **Trios**: 12 numbers consisting of 3 digits, from 0 to 999;
-- **Pairs**: 18 numbers consisting of 2 digits, from 0 to 99.
+- **Nonets**: 4 numbers with 9 digits each (0 to 999,999,999)  
+- **Sextets**: 6 numbers with 6 digits each (0 to 999,999)  
+- **Quartets**: 9 numbers with 4 digits each (0 to 9,999)  
+- **Trios**: 12 numbers with 3 digits each (0 to 999)  
+- **Pairs**: 18 numbers with 2 digits each (0 to 99)
+
+**Example with number**: `112793286231433463274784309528897279`
+
+- **Nonets**:  
+  `112793286`, `231433463`, `274784309`, `528897279`
+
+- **Sextets**:  
+  `112793`, `286231`, `433463`, `274784`, `309528`, `897279`
+
+- **Quartets**:  
+  `1127`, `9328`, `6231`, `4334`, `6327`, `4784`, `3095`, `2889`, `7279`
+
+- **Trios**:  
+  `112`, `793`, `286`, `231`, `433`, `463`, `274`, `784`, `309`, `528`, `897`, `279`
+
+- **Pairs**:  
+  `11`, `27`, `93`, `28`, `62`, `31`, `43`, `34`, `63`, `27`, `47`, `84`, `30`, `95`, `28`, `89`, `72`, `79`
+
+---
 
 ## Bet Verification
 
-Each bet is managed by a betting system that is not covered by this specification. A bet is verified by determining whether each player correctly guessed the drawn number. The chances of winning are inversely proportional to the interpretation format of the draw:
+The drawn number is only considered valid if the block has **6 or more confirmations**.  
+It is not recommended to pay prizes before these confirmations.  
+A bet is verified by checking whether each player correctly guessed the drawn number.
 
-- **Nonets**: 1 in 1 billion chance (0.0000001%) per number;
-- **Sextets**: 1 in 1 million chance (0.0001%) per number;
-- **Quartets**: 1 in 10 thousand chance (0.01%) per number;
-- **Trios**: 1 in 1 thousand chance (0.1%) per number;
-- **Pairs**: 1 in 100 chance (1%) per number.
+**Odds per draw type**:
+
+- **Nonets**: 1 in 1 billion (0.0000001%)  
+- **Sextets**: 1 in 1 million (0.0001%)  
+- **Quartets**: 1 in 10 thousand (0.01%)  
+- **Trios**: 1 in 1 thousand (0.1%)  
+- **Pairs**: 1 in 100 (1%)
 
 # License 
 
