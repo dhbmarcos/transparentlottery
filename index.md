@@ -74,16 +74,17 @@ Where:
 
 #### Expanded formula
 
-![](https://latex.codecogs.com/svg.image?d=h_0\cdot&space;16^0&plus;h_1\cdot&space;16^1&plus;h_2\cdot&space;16^2&plus;h_3\cdot&space;16^3&plus;h_4\cdot&space;16^4&plus;h_5\cdot&space;16^5&plus;h_6\cdot&space;16^6&plus;h_7\cdot&space;16^7)
-![](https://latex.codecogs.com/svg.image?&plus;h_8\cdot&space;16^8&plus;h_9\cdot&space;16^9&plus;h_10\cdot&space;16^{10}&plus;h_11\cdot&space;16^{11}&plus;h_12\cdot&space;16^{12}&plus;h_13\cdot&space;16^{13}&plus;h_14\cdot&space;16^{14}&plus;h_15\cdot&space;16^{15})
-![](https://latex.codecogs.com/svg.image?&plus;h_16\cdot&space;16^{16}&plus;h_17\cdot&space;16^{17}&plus;h_18\cdot&space;16^{18}&plus;h_19\cdot&space;16^{19}&plus;h_20\cdot&space;16^{20}&plus;h_21\cdot&space;16^{21}&plus;h_22\cdot&space;16^{22}&plus;h_23\cdot&space;16^{23})
-![](https://latex.codecogs.com/svg.image?&plus;h_24\cdot&space;16^{24}&plus;h_25\cdot&space;16^{25}&plus;h_26\cdot&space;16^{26}&plus;h_27\cdot&space;16^{27}&plus;h_28\cdot&space;16^{28}&plus;h_29\cdot&space;16^{29}&plus;h_30\cdot&space;16^{30}&plus;h_31\cdot&space;16^{31})
-![](https://latex.codecogs.com/svg.image?&plus;h_32\cdot&space;16^{32}&plus;h_33\cdot&space;16^{33}&plus;h_34\cdot&space;16^{34}&plus;h_35\cdot&space;16^{35}&plus;h_36\cdot&space;16^{36}&plus;h_37\cdot&space;16^{37}&plus;h_38\cdot&space;16^{38}&plus;h_39\cdot&space;16^{39})
-![](https://latex.codecogs.com/svg.image?&plus;h_40\cdot&space;16^{40}&plus;h_41\cdot&space;16^{41}&plus;h_42\cdot&space;16^{42}&plus;h_43\cdot&space;16^{43}&plus;h_44\cdot&space;16^{44}&plus;h_45\cdot&space;16^{45}&plus;h_46\cdot&space;16^{46}&plus;h_47\cdot&space;16^{47})
-![](https://latex.codecogs.com/svg.image?&plus;h_48\cdot&space;16^{48}&plus;h_49\cdot&space;16^{49}&plus;h_50\cdot&space;16^{50}&plus;h_51\cdot&space;16^{51}&plus;h_52\cdot&space;16^{52}&plus;h_53\cdot&space;16^{53}&plus;h_54\cdot&space;16^{54}&plus;h_55\cdot&space;16^{55})
-![](https://latex.codecogs.com/svg.image?&plus;h_56\cdot&space;16^{56}&plus;h_57\cdot&space;16^{57}&plus;h_58\cdot&space;16^{58}&plus;h_59\cdot&space;16^{59}&plus;h_60\cdot&space;16^{60}&plus;h_61\cdot&space;16^{61}&plus;h_62\cdot&space;16^{62}&plus;h_63\cdot&space;16^{63})
+![](https://latex.codecogs.com/svg.image?d=h_0\cdot16^0&plus;h_1\cdot16^1&plus;h_2\cdot16^2&plus;h_3\cdot16^3&plus;h_4\cdot16^4&plus;h_5\cdot16^5&plus;h_6\cdot16^6&plus;h_7\cdot16^7)
+![](https://latex.codecogs.com/svg.image?&plus;h_8\cdot16^8&plus;h_9\cdot16^9&plus;h_10\cdot16^{10}&plus;h_11\cdot16^{11}&plus;h_12\cdot16^{12}&plus;h_13\cdot16^{13}&plus;h_14\cdot16^{14}&plus;h_15\cdot16^{15})
+![](https://latex.codecogs.com/svg.image?&plus;h_16\cdot16^{16}&plus;h_17\cdot16^{17}&plus;h_18\cdot16^{18}&plus;h_19\cdot16^{19}&plus;h_20\cdot16^{20}&plus;h_21\cdot16^{21}&plus;h_22\cdot16^{22}&plus;h_23\cdot16^{23})
+![](https://latex.codecogs.com/svg.image?&plus;h_24\cdot16^{24}&plus;h_25\cdot16^{25}&plus;h_26\cdot16^{26}&plus;h_27\cdot16^{27}&plus;h_28\cdot16^{28}&plus;h_29\cdot16^{29}&plus;h_30\cdot16^{30}&plus;h_31\cdot16^{31})
+![](https://latex.codecogs.com/svg.image?&plus;h_32\cdot16^{32}&plus;h_33\cdot16^{33}&plus;h_34\cdot16^{34}&plus;h_35\cdot16^{35}&plus;h_36\cdot16^{36}&plus;h_37\cdot16^{37}&plus;h_38\cdot16^{38}&plus;h_39\cdot16^{39})
+![](https://latex.codecogs.com/svg.image?&plus;h_40\cdot16^{40}&plus;h_41\cdot16^{41}&plus;h_42\cdot16^{42}&plus;h_43\cdot16^{43}&plus;h_44\cdot16^{44}&plus;h_45\cdot16^{45}&plus;h_46\cdot16^{46}&plus;h_47\cdot16^{47})
+![](https://latex.codecogs.com/svg.image?&plus;h_48\cdot16^{48}&plus;h_49\cdot16^{49}&plus;h_50\cdot16^{50}&plus;h_51\cdot16^{51}&plus;h_52\cdot16^{52}&plus;h_53\cdot16^{53}&plus;h_54\cdot16^{54}&plus;h_55\cdot16^{55})
+![](https://latex.codecogs.com/svg.image?&plus;h_56\cdot16^{56}&plus;h_57\cdot16^{57}&plus;h_58\cdot16^{58}&plus;h_59\cdot16^{59}&plus;h_60\cdot16^{60}&plus;h_61\cdot16^{61}&plus;h_62\cdot16^{62}&plus;h_63\cdot16^{63})
 
 #### Example:  
+
 For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, each digt separated is:
 
 ```
@@ -92,14 +93,20 @@ For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`,
 
 Using table conversion:
 
-
 ```
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 13, 6, 6, 8, 9, 12, 0, 8, 5, 10, 14, 1, 6, 5, 8, 3, 1, 14, 9, 3, 4, 15, 15, 7, 6, 3, 10, 14, 4, 6, 10, 2, 10, 6, 12, 1, 7, 2, 11, 3, 15, 1, 11, 6, 0, 10, 8, 12, 14, 2, 6, 15
 ```
 
 The expanded formula is:
 
-![](https://latex.codecogs.com/svg.image?d=0\cdot&space;16^0&plus;0\cdot&space;16^1&plus;0\cdot&space;16^2&plus;0\cdot&space;16^3&plus;0\cdot&space;16^4&plus;0\cdot&space;16^5&plus;0\cdot&space;16^6&plus;0\cdot&space;16^7&plus;0\cdot&space;16^8&plus;0\cdot&space;16^9&plus;1\cdot&space;16^10&plus;9\cdot&space;16^11&plus;13\cdot&space;16^12&plus;6\cdot&space;16^13&plus;6\cdot&space;16^14&plus;8\cdot&space;16^15&plus;9\cdot&space;16^16&plus;12\cdot&space;16^17&plus;0\cdot&space;16^18&plus;8\cdot&space;16^19&plus;5\cdot&space;16^20&plus;10\cdot&space;16^21&plus;14\cdot&space;16^22&plus;1\cdot&space;16^23&plus;6\cdot&space;16^24&plus;5\cdot&space;16^25&plus;8\cdot&space;16^26&plus;3\cdot&space;16^27&plus;1\cdot&space;16^28&plus;14\cdot&space;16^29&plus;9\cdot&space;16^30&plus;3\cdot&space;16^31&plus;4\cdot&space;16^32&plus;15\cdot&space;16^33&plus;15\cdot&space;16^34&plus;7\cdot&space;16^35&plus;6\cdot&space;16^36&plus;3\cdot&space;16^37&plus;10\cdot&space;16^38&plus;14\cdot&space;16^39&plus;4\cdot&space;16^40&plus;6\cdot&space;16^41&plus;10\cdot&space;16^42&plus;2\cdot&space;16^43&plus;10\cdot&space;16^44&plus;6\cdot&space;16^45&plus;12\cdot&space;16^46&plus;1\cdot&space;16^47&plus;7\cdot&space;16^48&plus;2\cdot&space;16^49&plus;11\cdot&space;16^50&plus;3\cdot&space;16^51&plus;15\cdot&space;16^52&plus;1\cdot&space;16^53&plus;11\cdot&space;16^54&plus;6\cdot&space;16^55&plus;0\cdot&space;16^56&plus;10\cdot&space;16^57&plus;8\cdot&space;16^58&plus;12\cdot&space;16^59&plus;14\cdot&space;16^60&plus;2\cdot&space;16^61&plus;6\cdot&space;16^62&plus;15\cdot&space;16^63)
+![](https://latex.codecogs.com/svg.image?d=0\cdot16^0&plus;0\cdot16^1&plus;0\cdot16^2&plus;0\cdot16^3&plus;0\cdot16^4&plus;0\cdot16^5&plus;0\cdot16^6&plus;0\cdot16^7)
+![](https://latex.codecogs.com/svg.image?&plus;0\cdot16^8&plus;0\cdot16^9&plus;1\cdot16^{10}&plus;9\cdot16^{11}&plus;13\cdot16^{12}&plus;6\cdot16^{13}&plus;6\cdot16^{14}&plus;8\cdot16^{15})
+![](https://latex.codecogs.com/svg.image?&plus;9\cdot16^{16}&plus;12\cdot16^{17}&plus;0\cdot16^{18}&plus;8\cdot16^{19}&plus;5\cdot16^{20}&plus;10\cdot16^{21}&plus;14\cdot16^{22}&plus;1\cdot16^{23})
+![](https://latex.codecogs.com/svg.image?&plus;6\cdot16^{24}&plus;5\cdot16^{25}&plus;8\cdot16^{26}&plus;3\cdot16^{27}&plus;1\cdot16^{28}&plus;14\cdot16^{29}&plus;9\cdot16^{30}&plus;3\cdot16^{31})
+![](https://latex.codecogs.com/svg.image?&plus;4\cdot16^{32}&plus;15\cdot16^{33}&plus;15\cdot16^{34}&plus;7\cdot16^{35}&plus;6\cdot16^{36}&plus;3\cdot16^{37}&plus;10\cdot16^{38}&plus;14\cdot16^{39})
+![](https://latex.codecogs.com/svg.image?&plus;4\cdot16^{40}&plus;6\cdot16^{41}&plus;10\cdot16^{42}&plus;2\cdot16^{43}&plus;10\cdot16^{44}&plus;6\cdot16^{45}&plus;12\cdot16^{46}&plus;1\cdot16^{47})
+![](https://latex.codecogs.com/svg.image?&plus;7\cdot16^{48}&plus;2\cdot16^{49}&plus;11\cdot16^{50}&plus;3\cdot16^{51}&plus;15\cdot16^{52}&plus;1\cdot16^{53}&plus;11\cdot16^{54}&plus;6\cdot16^{55})
+![](https://latex.codecogs.com/svg.image?&plus;0\cdot16^{56}&plus;10\cdot16^{57}&plus;8\cdot16^{58}&plus;12\cdot16^{59}&plus;14\cdot16^{60}&plus;2\cdot16^{61}&plus;6\cdot16^{62}&plus;15\cdot16^{63})
 
 The results is
 
