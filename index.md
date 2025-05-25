@@ -46,7 +46,7 @@ After obtaining the hash, convert it to a decimal (base 10) value. The conversio
 
 The hexadecimal representation uses digits from 0 to F, corresponding to values from 0 to 15. In decimal representation, each hexadecimal digit is converted using:
 
-![](https://latex.codecogs.com/svg.image?d=\sum_{i=0}^{i=(64-1)}h_i\cdot&space;16^id=\sum_{i=0}^{i=(64-1)}h_i\cdot&space;16^i)
+![](https://latex.codecogs.com/svg.image?d=\sum_{i=0}^{i=(64-1)}h_i\cdot&space;16^i)
 
 Where:
 - ![](https://latex.codecogs.com/svg.image?d) is the decimal value.
