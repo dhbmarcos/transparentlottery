@@ -7,18 +7,23 @@
 Generation of pseudo-random numbers using a public algorithm based on Bitcoin network hashes.  
 With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that results cannot be manipulated. With this algorithm, anyone can manually perform the operation, making the process transparent.
 
+Summary process:
+
+1. Number Drawing
+2. Generating Draw Results
+3. Bet Verification
+
 ## Number Drawing
 
 To generate random data for number formation, the hash of a specific Bitcoin block will be used. The block number is the draw number. Since a Bitcoin block is generated on average every 10 minutes, a draw can also be generated at the same interval. Upon obtaining the block hash— a 256-bit hash or 64 hexadecimal characters from 0 to F — it is converted to a decimal number. The conversion must consider all hexadecimal characters at once. This process yields up to 78 digits from 0 to 9. For the draw, only the 36 rightmost digits are used, since there can be a variable number of leading zeros depending on mining difficulty.
 
-### Summary process:
+Summary process:
 
 1. Define the block number  
 2. Extract the block hash  
 3. Convert to decimal  
 4. Extract 36 decimal digits
 
----
 
 ### Defining the Block Number
 
