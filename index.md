@@ -46,14 +46,14 @@ After obtaining the hash, convert it to a decimal (base 10) value. The conversio
 
 The hexadecimal representation uses digits from 0 to F, corresponding to values from 0 to 15. In decimal representation, each hexadecimal digit is converted using:
 
-$$
-d = \sum_{i=0}^{i=(64-1)} h_i \cdot 16^i
-$$
+```math
+d=\sum_{i=0}^{i=(64-1)}h_i\cdot 16^id=\sum_{i=0}^{i=(64-1)}h_i\cdot 16^i
+```
 
 Where:
-- $d$ is the decimal value.
-- $i$ is the digit position, from right to left, starting at 0 to 63.
-- $h_i$ is the decimal value of the hexadecimal digit, as shown below:
+- ![](https://latex.codecogs.com/svg.image?d) is the decimal value.
+- ![](https://latex.codecogs.com/svg.image?i) is the digit position, from right to left, starting at 0 to 63.
+- ![](https://latex.codecogs.com/svg.image?h_i) is the decimal value of the hexadecimal digit, as shown below:
 
 | Hexadecimal | Decimal |
 |-------------|---------|
@@ -76,9 +76,9 @@ Where:
 
 #### Expanded formula
 
-$$
+```math
 d = h_0 \cdot 16^0 + h_1 \cdot 16^1 + h_2 \cdot 16^2 + h_3 \cdot 16^3 + h_4 \cdot 16^4 + h_5 \cdot 16^5 + h_6 \cdot 16^6 + h_7 \cdot 16^7 + h_8 \cdot 16^8 + h_9 \cdot 16^9 + h_10 \cdot 16^10 + h_11 \cdot 16^11 + h_12 \cdot 16^12 + h_13 \cdot 16^13 + h_14 \cdot 16^14 + h_15 \cdot 16^15 + h_16 \cdot 16^16 + h_17 \cdot 16^17 + h_18 \cdot 16^18 + h_19 \cdot 16^19 + h_20 \cdot 16^20 + h_21 \cdot 16^21 + h_22 \cdot 16^22 + h_23 \cdot 16^23 + h_24 \cdot 16^24 + h_25 \cdot 16^25 + h_26 \cdot 16^26 + h_27 \cdot 16^27 + h_28 \cdot 16^28 + h_29 \cdot 16^29 + h_30 \cdot 16^30 + h_31 \cdot 16^31 + h_32 \cdot 16^32 + h_33 \cdot 16^33 + h_34 \cdot 16^34 + h_35 \cdot 16^35 + h_36 \cdot 16^36 + h_37 \cdot 16^37 + h_38 \cdot 16^38 + h_39 \cdot 16^39 + h_40 \cdot 16^40 + h_41 \cdot 16^41 + h_42 \cdot 16^42 + h_43 \cdot 16^43 + h_44 \cdot 16^44 + h_45 \cdot 16^45 + h_46 \cdot 16^46 + h_47 \cdot 16^47 + h_48 \cdot 16^48 + h_49 \cdot 16^49 + h_50 \cdot 16^50 + h_51 \cdot 16^51 + h_52 \cdot 16^52 + h_53 \cdot 16^53 + h_54 \cdot 16^54 + h_55 \cdot 16^55 + h_56 \cdot 16^56 + h_57 \cdot 16^57 + h_58 \cdot 16^58 + h_59 \cdot 16^59 + h_60 \cdot 16^60 + h_61 \cdot 16^61 + h_62 \cdot 16^62 + h_63 \cdot 16^63
-$$
+```
 
 #### Example:  
 For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, each digt separated is:
@@ -96,9 +96,9 @@ Using table conversion:
 
 The expanded formula is:
 
-$$
+```math
 d = 0 \cdot 16^0 + 0 \cdot 16^1 + 0 \cdot 16^2 + 0 \cdot 16^3 + 0 \cdot 16^4 + 0 \cdot 16^5 + 0 \cdot 16^6 + 0 \cdot 16^7 + 0 \cdot 16^8 + 0 \cdot 16^9 + 1 \cdot 16^10 + 9 \cdot 16^11 + 13 \cdot 16^12 + 6 \cdot 16^13 + 6 \cdot 16^14 + 8 \cdot 16^15 + 9 \cdot 16^16 + 12 \cdot 16^17 + 0 \cdot 16^18 + 8 \cdot 16^19 + 5 \cdot 16^20 + 10 \cdot 16^21 + 14 \cdot 16^22 + 1 \cdot 16^23 + 6 \cdot 16^24 + 5 \cdot 16^25 + 8 \cdot 16^26 + 3 \cdot 16^27 + 1 \cdot 16^28 + 14 \cdot 16^29 + 9 \cdot 16^30 + 3 \cdot 16^31 + 4 \cdot 16^32 + 15 \cdot 16^33 + 15 \cdot 16^34 + 7 \cdot 16^35 + 6 \cdot 16^36 + 3 \cdot 16^37 + 10 \cdot 16^38 + 14 \cdot 16^39 + 4 \cdot 16^40 + 6 \cdot 16^41 + 10 \cdot 16^42 + 2 \cdot 16^43 + 10 \cdot 16^44 + 6 \cdot 16^45 + 12 \cdot 16^46 + 1 \cdot 16^47 + 7 \cdot 16^48 + 2 \cdot 16^49 + 11 \cdot 16^50 + 3 \cdot 16^51 + 15 \cdot 16^52 + 1 \cdot 16^53 + 11 \cdot 16^54 + 6 \cdot 16^55 + 0 \cdot 16^56 + 10 \cdot 16^57 + 8 \cdot 16^58 + 12 \cdot 16^59 + 14 \cdot 16^60 + 2 \cdot 16^61 + 6 \cdot 16^62 + 15 \cdot 16^63
-$$
+```
 
 The results is
 
