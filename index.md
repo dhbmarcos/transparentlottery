@@ -179,4 +179,4 @@ A bet is verified by checking whether each player correctly guessed the drawn nu
 ---
 Copyright (C) 2025 D. H. B. Marcos
 
-D. O. G.
+DEO OMNIS GLORIA!
