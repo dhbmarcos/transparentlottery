@@ -33,7 +33,7 @@ Choose a block number greater than the current Bitcoin block height, ensuring al
 
 Obtain the hash of the chosen block after its first confirmation, since players will be able to extract it after that point. The value must be a 256-bit hash (64 hexadecimal digits).
 
-**Example**:  
+#### Example
 For block 0, the hash is:
 
 ```
@@ -136,7 +136,9 @@ From the resulting number, draw results can be generated using the following pat
 - **Trios**: 12 numbers with 3 digits each (0 to 999)  
 - **Pairs**: 18 numbers with 2 digits each (0 to 99)
 
-**Example with number**: `112793286231433463274784309528897279`
+#### Example
+
+For number `112793286231433463274784309528897279` we have results:
 
 - **Nonets**:  
   `112793286`, `231433463`, `274784309`, `528897279`
