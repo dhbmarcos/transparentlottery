@@ -72,7 +72,7 @@ Where:
 | E           | 14      |
 | F           | 15      |
 
-#### Expanded formula
+The expanded formula is:
 
 ![](https://latex.codecogs.com/svg.image?d=h_0\cdot16^0&plus;h_1\cdot16^1&plus;h_2\cdot16^2&plus;h_3\cdot16^3&plus;h_4\cdot16^4&plus;h_5\cdot16^5&plus;h_6\cdot16^6&plus;h_7\cdot16^7)
 ![](https://latex.codecogs.com/svg.image?&plus;h_8\cdot16^8&plus;h_9\cdot16^9&plus;h_10\cdot16^{10}&plus;h_11\cdot16^{11}&plus;h_12\cdot16^{12}&plus;h_13\cdot16^{13}&plus;h_14\cdot16^{14}&plus;h_15\cdot16^{15})
