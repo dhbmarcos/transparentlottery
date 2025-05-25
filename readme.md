@@ -42,15 +42,14 @@ After obtaining the hash, convert it to a decimal (base 10) value. The conversio
 
 The hexadecimal representation uses digits from 0 to F, corresponding to values from 0 to 15. In decimal representation, each hexadecimal digit is converted using:
 
-```latex
 $$
-d = \sum_{p=0}^{63} h_p 	imes 16^p
+d = \sum_{i=0}^{i=(64-1)} h_i \cdot 16^i
 $$
-```
 
 Where:
-- `p` is the digit position, from right to left, starting at 0 to 63  
-- `h_p` is the decimal value of the hexadecimal digit, as shown below:
+- $d$ is the decimal value.
+- $i$ is the digit position, from right to left, starting at 0 to 63.
+- $h_i$ is the decimal value of the hexadecimal digit, as shown below:
 
 | Hexadecimal | Decimal |
 |-------------|---------|
@@ -71,33 +70,49 @@ Where:
 | E           | 14      |
 | F           | 15      |
 
-**Expanded formula**:
+#### Expanded formula
 
-```latex
 $$
-d = h_0 	imes 16^0 + h_1 	imes 16^1 + \dots + h_{63} 	imes 16^{63}
+d = h_0 \cdot 16^0 + h_1 \cdot 16^1 + h_2 \cdot 16^2 + h_3 \cdot 16^3 + h_4 \cdot 16^4 + h_5 \cdot 16^5 + h_6 \cdot 16^6 + h_7 \cdot 16^7 + h_8 \cdot 16^8 + h_9 \cdot 16^9 + h_10 \cdot 16^10 + h_11 \cdot 16^11 + h_12 \cdot 16^12 + h_13 \cdot 16^13 + h_14 \cdot 16^14 + h_15 \cdot 16^15 + h_16 \cdot 16^16 + h_17 \cdot 16^17 + h_18 \cdot 16^18 + h_19 \cdot 16^19 + h_20 \cdot 16^20 + h_21 \cdot 16^21 + h_22 \cdot 16^22 + h_23 \cdot 16^23 + h_24 \cdot 16^24 + h_25 \cdot 16^25 + h_26 \cdot 16^26 + h_27 \cdot 16^27 + h_28 \cdot 16^28 + h_29 \cdot 16^29 + h_30 \cdot 16^30 + h_31 \cdot 16^31 + h_32 \cdot 16^32 + h_33 \cdot 16^33 + h_34 \cdot 16^34 + h_35 \cdot 16^35 + h_36 \cdot 16^36 + h_37 \cdot 16^37 + h_38 \cdot 16^38 + h_39 \cdot 16^39 + h_40 \cdot 16^40 + h_41 \cdot 16^41 + h_42 \cdot 16^42 + h_43 \cdot 16^43 + h_44 \cdot 16^44 + h_45 \cdot 16^45 + h_46 \cdot 16^46 + h_47 \cdot 16^47 + h_48 \cdot 16^48 + h_49 \cdot 16^49 + h_50 \cdot 16^50 + h_51 \cdot 16^51 + h_52 \cdot 16^52 + h_53 \cdot 16^53 + h_54 \cdot 16^54 + h_55 \cdot 16^55 + h_56 \cdot 16^56 + h_57 \cdot 16^57 + h_58 \cdot 16^58 + h_59 \cdot 16^59 + h_60 \cdot 16^60 + h_61 \cdot 16^61 + h_62 \cdot 16^62 + h_63 \cdot 16^63
 $$
+
+#### Example:  
+For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, each digt separated is:
+
+```
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, d, 6, 6, 8, 9, c, 0, 8, 5, a, e, 1, 6, 5, 8, 3, 1, e, 9, 3, 4, f, f, 7, 6, 3, a, e, 4, 6, a, 2, a, 6, c, 1, 7, 2, b, 3, f, 1, b, 6, 0, a, 8, c, e, 2, 6, f
 ```
 
-**Example**:  
-For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, the resulting decimal is:
+Using table conversion:
+
+
+```
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 13, 6, 6, 8, 9, 12, 0, 8, 5, 10, 14, 1, 6, 5, 8, 3, 1, 14, 9, 3, 4, 15, 15, 7, 6, 3, 10, 14, 4, 6, 10, 2, 10, 6, 12, 1, 7, 2, 11, 3, 15, 1, 11, 6, 0, 10, 8, 12, 14, 2, 6, 15
+```
+
+The expanded formula is:
+
+$$
+d = 0 \cdot 16^0 + 0 \cdot 16^1 + 0 \cdot 16^2 + 0 \cdot 16^3 + 0 \cdot 16^4 + 0 \cdot 16^5 + 0 \cdot 16^6 + 0 \cdot 16^7 + 0 \cdot 16^8 + 0 \cdot 16^9 + 1 \cdot 16^10 + 9 \cdot 16^11 + 13 \cdot 16^12 + 6 \cdot 16^13 + 6 \cdot 16^14 + 8 \cdot 16^15 + 9 \cdot 16^16 + 12 \cdot 16^17 + 0 \cdot 16^18 + 8 \cdot 16^19 + 5 \cdot 16^20 + 10 \cdot 16^21 + 14 \cdot 16^22 + 1 \cdot 16^23 + 6 \cdot 16^24 + 5 \cdot 16^25 + 8 \cdot 16^26 + 3 \cdot 16^27 + 1 \cdot 16^28 + 14 \cdot 16^29 + 9 \cdot 16^30 + 3 \cdot 16^31 + 4 \cdot 16^32 + 15 \cdot 16^33 + 15 \cdot 16^34 + 7 \cdot 16^35 + 6 \cdot 16^36 + 3 \cdot 16^37 + 10 \cdot 16^38 + 14 \cdot 16^39 + 4 \cdot 16^40 + 6 \cdot 16^41 + 10 \cdot 16^42 + 2 \cdot 16^43 + 10 \cdot 16^44 + 6 \cdot 16^45 + 12 \cdot 16^46 + 1 \cdot 16^47 + 7 \cdot 16^48 + 2 \cdot 16^49 + 11 \cdot 16^50 + 3 \cdot 16^51 + 15 \cdot 16^52 + 1 \cdot 16^53 + 11 \cdot 16^54 + 6 \cdot 16^55 + 0 \cdot 16^56 + 10 \cdot 16^57 + 8 \cdot 16^58 + 12 \cdot 16^59 + 14 \cdot 16^60 + 2 \cdot 16^61 + 6 \cdot 16^62 + 15 \cdot 16^63
+$$
+
+The results is
 
 ```
 170063117907496993344802296311112793286231433463274784309528897279
 ```
 
----
-
 ### Extracting 36 Decimal Digits
 
 After conversion, extract the 36 rightmost digits (from right to left):
 
-**Example**:  
+#### Example
+
+For `170063117907496993344802296311112793286231433463274784309528897279`, 32 the 36 rightmost digits is
+
 ```
 112793286231433463274784309528897279
 ```
-
----
 
 ## Generating Draw Results
 
