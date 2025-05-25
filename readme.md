@@ -2,7 +2,6 @@
   <img src="transparent-lottery.png" alt="Transparent Lottery Logo" width="300">
 </p>
 
-
 # Transparent Lottery
 
 Generation of pseudo-random numbers using a public algorithm based on Bitcoin network hashes.  
@@ -42,14 +41,12 @@ After obtaining the hash, convert it to a decimal (base 10) value. The conversio
 
 The hexadecimal representation uses digits from 0 to F, corresponding to values from 0 to 15. In decimal representation, each hexadecimal digit is converted using:
 
-$$
-d = \sum_{i=0}^{i=(64-1)} h_i \cdot 16^i
-$$
+![](https://latex.codecogs.com/png.image?d=\sum_{i=0}^{i=(64-1)}h_i\cdot&space;16^id=\sum_{i=0}^{i=(64-1)}h_i\cdot&space;16^i)
 
 Where:
-- $d$ is the decimal value.
-- $i$ is the digit position, from right to left, starting at 0 to 63.
-- $h_i$ is the decimal value of the hexadecimal digit, as shown below:
+- ![](https://latex.codecogs.com/png.image?d) is the decimal value.
+- ![](https://latex.codecogs.com/png.image?i) is the digit position, from right to left, starting at 0 to 63.
+- ![](https://latex.codecogs.com/png.image?h_i) is the decimal value of the hexadecimal digit, as shown below:
 
 | Hexadecimal | Decimal |
 |-------------|---------|
@@ -72,9 +69,7 @@ Where:
 
 #### Expanded formula
 
-$$
-d = h_0 \cdot 16^0 + h_1 \cdot 16^1 + h_2 \cdot 16^2 + h_3 \cdot 16^3 + h_4 \cdot 16^4 + h_5 \cdot 16^5 + h_6 \cdot 16^6 + h_7 \cdot 16^7 + h_8 \cdot 16^8 + h_9 \cdot 16^9 + h_10 \cdot 16^10 + h_11 \cdot 16^11 + h_12 \cdot 16^12 + h_13 \cdot 16^13 + h_14 \cdot 16^14 + h_15 \cdot 16^15 + h_16 \cdot 16^16 + h_17 \cdot 16^17 + h_18 \cdot 16^18 + h_19 \cdot 16^19 + h_20 \cdot 16^20 + h_21 \cdot 16^21 + h_22 \cdot 16^22 + h_23 \cdot 16^23 + h_24 \cdot 16^24 + h_25 \cdot 16^25 + h_26 \cdot 16^26 + h_27 \cdot 16^27 + h_28 \cdot 16^28 + h_29 \cdot 16^29 + h_30 \cdot 16^30 + h_31 \cdot 16^31 + h_32 \cdot 16^32 + h_33 \cdot 16^33 + h_34 \cdot 16^34 + h_35 \cdot 16^35 + h_36 \cdot 16^36 + h_37 \cdot 16^37 + h_38 \cdot 16^38 + h_39 \cdot 16^39 + h_40 \cdot 16^40 + h_41 \cdot 16^41 + h_42 \cdot 16^42 + h_43 \cdot 16^43 + h_44 \cdot 16^44 + h_45 \cdot 16^45 + h_46 \cdot 16^46 + h_47 \cdot 16^47 + h_48 \cdot 16^48 + h_49 \cdot 16^49 + h_50 \cdot 16^50 + h_51 \cdot 16^51 + h_52 \cdot 16^52 + h_53 \cdot 16^53 + h_54 \cdot 16^54 + h_55 \cdot 16^55 + h_56 \cdot 16^56 + h_57 \cdot 16^57 + h_58 \cdot 16^58 + h_59 \cdot 16^59 + h_60 \cdot 16^60 + h_61 \cdot 16^61 + h_62 \cdot 16^62 + h_63 \cdot 16^63
-$$
+![](https://latex.codecogs.com/png.image?&space;d=h_0\cdot&space;16^0&plus;h_1\cdot&space;16^1&plus;h_2\cdot&space;16^2&plus;h_3\cdot&space;16^3&plus;h_4\cdot&space;16^4&plus;h_5\cdot&space;16^5&plus;h_6\cdot&space;16^6&plus;h_7\cdot&space;16^7&plus;h_8\cdot&space;16^8&plus;h_9\cdot&space;16^9&plus;h_10\cdot&space;16^10&plus;h_11\cdot&space;16^11&plus;h_12\cdot&space;16^12&plus;h_13\cdot&space;16^13&plus;h_14\cdot&space;16^14&plus;h_15\cdot&space;16^15&plus;h_16\cdot&space;16^16&plus;h_17\cdot&space;16^17&plus;h_18\cdot&space;16^18&plus;h_19\cdot&space;16^19&plus;h_20\cdot&space;16^20&plus;h_21\cdot&space;16^21&plus;h_22\cdot&space;16^22&plus;h_23\cdot&space;16^23&plus;h_24\cdot&space;16^24&plus;h_25\cdot&space;16^25&plus;h_26\cdot&space;16^26&plus;h_27\cdot&space;16^27&plus;h_28\cdot&space;16^28&plus;h_29\cdot&space;16^29&plus;h_30\cdot&space;16^30&plus;h_31\cdot&space;16^31&plus;h_32\cdot&space;16^32&plus;h_33\cdot&space;16^33&plus;h_34\cdot&space;16^34&plus;h_35\cdot&space;16^35&plus;h_36\cdot&space;16^36&plus;h_37\cdot&space;16^37&plus;h_38\cdot&space;16^38&plus;h_39\cdot&space;16^39&plus;h_40\cdot&space;16^40&plus;h_41\cdot&space;16^41&plus;h_42\cdot&space;16^42&plus;h_43\cdot&space;16^43&plus;h_44\cdot&space;16^44&plus;h_45\cdot&space;16^45&plus;h_46\cdot&space;16^46&plus;h_47\cdot&space;16^47&plus;h_48\cdot&space;16^48&plus;h_49\cdot&space;16^49&plus;h_50\cdot&space;16^50&plus;h_51\cdot&space;16^51&plus;h_52\cdot&space;16^52&plus;h_53\cdot&space;16^53&plus;h_54\cdot&space;16^54&plus;h_55\cdot&space;16^55&plus;h_56\cdot&space;16^56&plus;h_57\cdot&space;16^57&plus;h_58\cdot&space;16^58&plus;h_59\cdot&space;16^59&plus;h_60\cdot&space;16^60&plus;h_61\cdot&space;16^61&plus;h_62\cdot&space;16^62&plus;h_63\cdot&space;16^63)
 
 #### Example:  
 For the hash `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, each digt separated is:
@@ -92,9 +87,7 @@ Using table conversion:
 
 The expanded formula is:
 
-$$
-d = 0 \cdot 16^0 + 0 \cdot 16^1 + 0 \cdot 16^2 + 0 \cdot 16^3 + 0 \cdot 16^4 + 0 \cdot 16^5 + 0 \cdot 16^6 + 0 \cdot 16^7 + 0 \cdot 16^8 + 0 \cdot 16^9 + 1 \cdot 16^10 + 9 \cdot 16^11 + 13 \cdot 16^12 + 6 \cdot 16^13 + 6 \cdot 16^14 + 8 \cdot 16^15 + 9 \cdot 16^16 + 12 \cdot 16^17 + 0 \cdot 16^18 + 8 \cdot 16^19 + 5 \cdot 16^20 + 10 \cdot 16^21 + 14 \cdot 16^22 + 1 \cdot 16^23 + 6 \cdot 16^24 + 5 \cdot 16^25 + 8 \cdot 16^26 + 3 \cdot 16^27 + 1 \cdot 16^28 + 14 \cdot 16^29 + 9 \cdot 16^30 + 3 \cdot 16^31 + 4 \cdot 16^32 + 15 \cdot 16^33 + 15 \cdot 16^34 + 7 \cdot 16^35 + 6 \cdot 16^36 + 3 \cdot 16^37 + 10 \cdot 16^38 + 14 \cdot 16^39 + 4 \cdot 16^40 + 6 \cdot 16^41 + 10 \cdot 16^42 + 2 \cdot 16^43 + 10 \cdot 16^44 + 6 \cdot 16^45 + 12 \cdot 16^46 + 1 \cdot 16^47 + 7 \cdot 16^48 + 2 \cdot 16^49 + 11 \cdot 16^50 + 3 \cdot 16^51 + 15 \cdot 16^52 + 1 \cdot 16^53 + 11 \cdot 16^54 + 6 \cdot 16^55 + 0 \cdot 16^56 + 10 \cdot 16^57 + 8 \cdot 16^58 + 12 \cdot 16^59 + 14 \cdot 16^60 + 2 \cdot 16^61 + 6 \cdot 16^62 + 15 \cdot 16^63
-$$
+![](https://latex.codecogs.com/png.image?d=0\cdot&space;16^0&plus;0\cdot&space;16^1&plus;0\cdot&space;16^2&plus;0\cdot&space;16^3&plus;0\cdot&space;16^4&plus;0\cdot&space;16^5&plus;0\cdot&space;16^6&plus;0\cdot&space;16^7&plus;0\cdot&space;16^8&plus;0\cdot&space;16^9&plus;1\cdot&space;16^10&plus;9\cdot&space;16^11&plus;13\cdot&space;16^12&plus;6\cdot&space;16^13&plus;6\cdot&space;16^14&plus;8\cdot&space;16^15&plus;9\cdot&space;16^16&plus;12\cdot&space;16^17&plus;0\cdot&space;16^18&plus;8\cdot&space;16^19&plus;5\cdot&space;16^20&plus;10\cdot&space;16^21&plus;14\cdot&space;16^22&plus;1\cdot&space;16^23&plus;6\cdot&space;16^24&plus;5\cdot&space;16^25&plus;8\cdot&space;16^26&plus;3\cdot&space;16^27&plus;1\cdot&space;16^28&plus;14\cdot&space;16^29&plus;9\cdot&space;16^30&plus;3\cdot&space;16^31&plus;4\cdot&space;16^32&plus;15\cdot&space;16^33&plus;15\cdot&space;16^34&plus;7\cdot&space;16^35&plus;6\cdot&space;16^36&plus;3\cdot&space;16^37&plus;10\cdot&space;16^38&plus;14\cdot&space;16^39&plus;4\cdot&space;16^40&plus;6\cdot&space;16^41&plus;10\cdot&space;16^42&plus;2\cdot&space;16^43&plus;10\cdot&space;16^44&plus;6\cdot&space;16^45&plus;12\cdot&space;16^46&plus;1\cdot&space;16^47&plus;7\cdot&space;16^48&plus;2\cdot&space;16^49&plus;11\cdot&space;16^50&plus;3\cdot&space;16^51&plus;15\cdot&space;16^52&plus;1\cdot&space;16^53&plus;11\cdot&space;16^54&plus;6\cdot&space;16^55&plus;0\cdot&space;16^56&plus;10\cdot&space;16^57&plus;8\cdot&space;16^58&plus;12\cdot&space;16^59&plus;14\cdot&space;16^60&plus;2\cdot&space;16^61&plus;6\cdot&space;16^62&plus;15\cdot&space;16^63)
 
 The results is
 
