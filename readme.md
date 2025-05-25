@@ -9,11 +9,11 @@ With this innovation, betting games, raffles, and prizes can benefit from the tr
 
 Summary process:
 
-1. Number Drawing
+1. Getting Draw of Number
 2. Generating Draw Results
 3. Bet Verification
 
-## Number Drawing
+## Getting Draw of Number
 
 To generate random data for number formation, the hash of a specific Bitcoin block will be used. The block number is the draw number. Since a Bitcoin block is generated on average every 10 minutes, a draw can also be generated at the same interval. Upon obtaining the block hash— a 256-bit hash or 64 hexadecimal characters from 0 to F — it is converted to a decimal number. The conversion must consider all hexadecimal characters at once. This process yields up to 78 digits from 0 to 9. For the draw, only the 36 rightmost digits are used, since there can be a variable number of leading zeros depending on mining difficulty.
 
@@ -74,14 +74,14 @@ Where:
 
 The expanded formula is:
 
-![](https://latex.codecogs.com/svg.image?d=h_0\cdot16^0&plus;h_1\cdot16^1&plus;h_2\cdot16^2&plus;h_3\cdot16^3&plus;h_4\cdot16^4&plus;h_5\cdot16^5&plus;h_6\cdot16^6&plus;h_7\cdot16^7)
-![](https://latex.codecogs.com/svg.image?&plus;h_8\cdot16^8&plus;h_9\cdot16^9&plus;h_10\cdot16^{10}&plus;h_11\cdot16^{11}&plus;h_12\cdot16^{12}&plus;h_13\cdot16^{13}&plus;h_14\cdot16^{14}&plus;h_15\cdot16^{15})
-![](https://latex.codecogs.com/svg.image?&plus;h_16\cdot16^{16}&plus;h_17\cdot16^{17}&plus;h_18\cdot16^{18}&plus;h_19\cdot16^{19}&plus;h_20\cdot16^{20}&plus;h_21\cdot16^{21}&plus;h_22\cdot16^{22}&plus;h_23\cdot16^{23})
-![](https://latex.codecogs.com/svg.image?&plus;h_24\cdot16^{24}&plus;h_25\cdot16^{25}&plus;h_26\cdot16^{26}&plus;h_27\cdot16^{27}&plus;h_28\cdot16^{28}&plus;h_29\cdot16^{29}&plus;h_30\cdot16^{30}&plus;h_31\cdot16^{31})
-![](https://latex.codecogs.com/svg.image?&plus;h_32\cdot16^{32}&plus;h_33\cdot16^{33}&plus;h_34\cdot16^{34}&plus;h_35\cdot16^{35}&plus;h_36\cdot16^{36}&plus;h_37\cdot16^{37}&plus;h_38\cdot16^{38}&plus;h_39\cdot16^{39})
-![](https://latex.codecogs.com/svg.image?&plus;h_40\cdot16^{40}&plus;h_41\cdot16^{41}&plus;h_42\cdot16^{42}&plus;h_43\cdot16^{43}&plus;h_44\cdot16^{44}&plus;h_45\cdot16^{45}&plus;h_46\cdot16^{46}&plus;h_47\cdot16^{47})
-![](https://latex.codecogs.com/svg.image?&plus;h_48\cdot16^{48}&plus;h_49\cdot16^{49}&plus;h_50\cdot16^{50}&plus;h_51\cdot16^{51}&plus;h_52\cdot16^{52}&plus;h_53\cdot16^{53}&plus;h_54\cdot16^{54}&plus;h_55\cdot16^{55})
-![](https://latex.codecogs.com/svg.image?&plus;h_56\cdot16^{56}&plus;h_57\cdot16^{57}&plus;h_58\cdot16^{58}&plus;h_59\cdot16^{59}&plus;h_60\cdot16^{60}&plus;h_61\cdot16^{61}&plus;h_62\cdot16^{62}&plus;h_63\cdot16^{63})
+![](https://latex.codecogs.com/svg.image?d=h_{0}\cdot16^0&plus;h_{1}\cdot16^1&plus;h_{2}\cdot16^2&plus;h_{3}\cdot16^3&plus;h_{4}\cdot16^4&plus;h_{5}\cdot16^5&plus;h_{6}\cdot16^6&plus;h_{7}\cdot16^7)
+![](https://latex.codecogs.com/svg.image?&plus;h_{8}\cdot16^8&plus;h_{9}\cdot16^9&plus;h_{10}\cdot16^{10}&plus;h_{11}\cdot16^{11}&plus;h_{12}\cdot16^{12}&plus;h_{13}\cdot16^{13}&plus;h_{14}\cdot16^{14}&plus;h_{15}\cdot16^{15})
+![](https://latex.codecogs.com/svg.image?&plus;h_{16}\cdot16^{16}&plus;h_{17}\cdot16^{17}&plus;h_{18}\cdot16^{18}&plus;h_{19}\cdot16^{19}&plus;h_{20}\cdot16^{20}&plus;h_{21}\cdot16^{21}&plus;h_{22}\cdot16^{22}&plus;h_{23}\cdot16^{23})
+![](https://latex.codecogs.com/svg.image?&plus;h_{24}\cdot16^{24}&plus;h_{25}\cdot16^{25}&plus;h_{26}\cdot16^{26}&plus;h_{27}\cdot16^{27}&plus;h_{28}\cdot16^{28}&plus;h_{29}\cdot16^{29}&plus;h_{30}\cdot16^{30}&plus;h_{31}\cdot16^{31})
+![](https://latex.codecogs.com/svg.image?&plus;h_{32}\cdot16^{32}&plus;h_{33}\cdot16^{33}&plus;h_{34}\cdot16^{34}&plus;h_{35}\cdot16^{35}&plus;h_{36}\cdot16^{36}&plus;h_{37}\cdot16^{37}&plus;h_{38}\cdot16^{38}&plus;h_{39}\cdot16^{39})
+![](https://latex.codecogs.com/svg.image?&plus;h_{40}\cdot16^{40}&plus;h_{41}\cdot16^{41}&plus;h_{42}\cdot16^{42}&plus;h_{43}\cdot16^{43}&plus;h_{44}\cdot16^{44}&plus;h_{45}\cdot16^{45}&plus;h_{46}\cdot16^{46}&plus;h_{47}\cdot16^{47})
+![](https://latex.codecogs.com/svg.image?&plus;h_{48}\cdot16^{48}&plus;h_{49}\cdot16^{49}&plus;h_{50}\cdot16^{50}&plus;h_{51}\cdot16^{51}&plus;h_{52}\cdot16^{52}&plus;h_{53}\cdot16^{53}&plus;h_{54}\cdot16^{54}&plus;h_{55}\cdot16^{55})
+![](https://latex.codecogs.com/svg.image?&plus;h_{56}\cdot16^{56}&plus;h_{57}\cdot16^{57}&plus;h_{58}\cdot16^{58}&plus;h_{59}\cdot16^{59}&plus;h_{60}\cdot16^{60}&plus;h_{61}\cdot16^{61}&plus;h_{62}\cdot16^{62}&plus;h_{63}\cdot16^{63})
 
 #### Example:  
 
@@ -120,7 +120,7 @@ After conversion, extract the 36 rightmost digits (from right to left):
 
 #### Example
 
-For `170063117907496993344802296311112793286231433463274784309528897279`, 32 the 36 rightmost digits is
+For `170063117907496993344802296311112793286231433463274784309528897279`, the 36 rightmost digits is
 
 ```
 112793286231433463274784309528897279
