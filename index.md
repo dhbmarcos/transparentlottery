@@ -11,7 +11,7 @@ title: Transparent Lottery
 
 Generation of pseudo-random numbers from a public, verifiable algorithm using Bitcoin network hashes.
 
-With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that there will be no manipulation of the results. With this algorithm, anyone can manually perform the operation, making the process transparent.
+With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that there will be no manipulation of the results. With this algorithm, anyone can verify the operation, making the process transparent.
 
 ## Number Drawing
 
