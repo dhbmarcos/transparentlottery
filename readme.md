@@ -53,8 +53,7 @@ The conversion algorithm is the Python function below.
 
 ```python
 def generate_draw_numbers(self, seed: str, base: int) -> list[int]:
-    seed = bytes.fromhex(seed.zfill(64))
-    seed = int.from_bytes(seed, byteorder="big")
+    seed = int.from_bytes(bytes.fromhex(seed.zfill(64)), byteorder="big")
     numbers = []
     while seed > 0:
         numbers.append(seed % base)
