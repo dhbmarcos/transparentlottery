@@ -4,7 +4,7 @@
 
 # Transparent Lottery
 
-<a href="http://example.transparentlottery.com" target="_blank">
+<a href="https://example.transparentlottery.com" target="_blank">
   <img src="https://img.shields.io/badge/ACCESS%20DRAW%20RESULTS%20NOW-FFA500?style=for-the-badge&logo=bitcoin&logoColor=white&labelColor=FFA500" />
 </a>
 
