@@ -1,40 +1,33 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/development/cicd/templates/
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Pages/Jekyll.gitlab-ci.yml
+# requiring the environment of NodeJS 10
+image: node:10
 
-default:
-  # Template project: https://gitlab.com/pages/jekyll
-  # Docs: https://docs.gitlab.com/ee/pages/
-  image: ruby:3.1.2
-  before_script:
-    - gem install bundler:2.2.22
-    - bundle install
+# add 'node_modules' to cache for speeding up builds
+cache:
+  paths:
+    - node_modules/ # Node modules and dependencies
 
-variables:
-  JEKYLL_ENV: production
-  LC_ALL: C.UTF-8
+before_script:
+  - npm install gitbook-cli -g # install gitbook
+  - gitbook fetch 3.2.3 # fetch final stable version
+  - gitbook install # add any requested plugins in book.json
 
 test:
   stage: test
   script:
-    - bundle exec jekyll build -d test
-  artifacts:
-    paths:
-      - test
+    - gitbook build . public # build to public path
+  only:
+    - branches # this job will affect every branch except 'master'
   except:
-    variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
+    - main
+    
+# the 'pages' job will deploy and build your site to the 'public' path
 pages:
   stage: deploy
   script:
-    - bundle exec jekyll build -d public
+    - gitbook build . public # build to public path
   artifacts:
     paths:
       - public
+    expire_in: 1 week
   only:
-    variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  environment: production
+    - main # this job will affect only the 'master' branch
