@@ -1,3 +1,18 @@
+---
+layout: default
+title: Transparent Lottery
+---
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9QGWBDVQ8B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9QGWBDVQ8B');
+</script>
+
 <p align="center">
   <img src="transparent-lottery.png" alt="Transparent Lottery Logo" width="300">
 </p>
