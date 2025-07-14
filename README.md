@@ -45,18 +45,46 @@ Obtain the hash of the block of the defined height, after the first validation, 
 
 For block 0, when checking the hash, we find the value `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f` in hexadecimal. This is the **drawing seed number**.
 
-## Generation of the Drawing Results
+## Generation of Drawing Roll Number
 
-After obtaining the **drawing seed number**, convert it to the **game base**. The conversion algorithm used must be public so that it can be publicly verified.
+After obtaining the **drawing seed number**, reprocess it using the **SHA-256** algorithm. Each application of the algorithm produces a **drawing roll number**.
+Set the **Roll** value to determine which **drawing roll number** you want to generate. The **Roll** `0` is always equal to **drawing seed number**.
 
 ### Example
 
-For the **drawing seed number** `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, for the base 6 game, the drawing results are `1`, `3`, `5`, `2`, `5`, `2`, `1`, `2`, `5`, `2`, `0`, `1`, `0`, `1`, `0`, `2`, `5`, `2`, `1`, `2`, `4`, `2`, `2`, `1`, `2`, `2`, `4`, `2`, `1`, `2`, `0`, `0`, `2`, `0`, `2`, `4`, `5`, `5`, `4`, `4`, `5`, `1`, `5`, `0`, `5`, `4`, `2`, `0`, `1`, `0`, `5`, `4`, `1`, `5`, `0`, `3`, `1`, `0`, `5`, `0`, `3`, `5`, `3`, `1`, `0`, `3`, `3`, `3`, `0`, `1`, `3`, `1`, `5`, `2`, `3`, `4`, `1`, `4`, `3`, `2`, `5`, `4`, `3`.
+```python
+import hashlib
+
+
+def new_drawing_roll_number(drawing_roll_number: str):
+    return = hashlib.sha256(bytes.fromhex(drawing_roll_number)).hexdigest()
+
+
+drawing_seed_number = "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
+print(f"roll 0:", drawing_seed_number)
+
+drawing_roll_number_1 = new_drawing_roll_number(drawing_seed_number)
+print(f"roll 1:", drawing_roll_number_1)
+
+drawing_roll_number_2 = new_drawing_roll_number(drawing_roll_number_1)
+print(f"roll 2:", drawing_roll_number_2)
+
+drawing_roll_number_3 = new_drawing_roll_number(drawing_roll_number_2)
+print(f"roll 3:", drawing_roll_number_3)
+```
+
+## Generation of the Drawing Results
+
+After obtaining the **drawing roll number**, convert it to the **game base**. The conversion algorithm used must be public so that it can be publicly verified.
+
+### Example
+
+For the **drawing seed number** `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, **roll** `0`, the **drawing roll number** `is 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, for the base 6 game, the drawing results are `1`, `3`, `5`, `2`, `5`, `2`, `1`, `2`, `5`, `2`, `0`, `1`, `0`, `1`, `0`, `2`, `5`, `2`, `1`, `2`, `4`, `2`, `2`, `1`, `2`, `2`, `4`, `2`, `1`, `2`, `0`, `0`, `2`, `0`, `2`, `4`, `5`, `5`, `4`, `4`, `5`, `1`, `5`, `0`, `5`, `4`, `2`, `0`, `1`, `0`, `5`, `4`, `1`, `5`, `0`, `3`, `1`, `0`, `5`, `0`, `3`, `5`, `3`, `1`, `0`, `3`, `3`, `3`, `0`, `1`, `3`, `1`, `5`, `2`, `3`, `4`, `1`, `4`, `3`, `2`, `5`, `4`, `3`.
 
 The conversion algorithm is the Python function below.
 
 ```python
-def generate_draw_numbers(self, seed: str, base: int) -> list[int]:
+def generate_drawing_numbers(self, seed: str, base: int) -> list[int]:
     seed = int.from_bytes(bytes.fromhex(seed.zfill(64)), byteorder="big")
     numbers = []
     while seed > 0:
