@@ -36,11 +36,11 @@ For a 6-sided die, the **game base** is `6`.
 
 ## Definition of the Block Number
 
-Define a **block number** for values greater than the height of the last Bitcoin block, sufficient for all bets to be placed in a timely manner.
+Define a **block number** with a value greater than the height of the last Bitcoin block, sufficient for all bets to be placed in a timely manner.
 
 ## Extraction of the Drawing Seed Number
 
-Obtain the hash of the block of the defined height, after the first validation, because players can make the extraction after the first validation. The extracted value must be a 256-bit hash (64 hexadecimal digits). This is the **drawing seed number**.
+Obtain the hash of the block at the defined height, after the first validation, because players can make the extraction after the first validation. The extracted value must be a 256-bit hash (64 hexadecimal digits). This is the **drawing seed number**.
 
 ### Example
 
