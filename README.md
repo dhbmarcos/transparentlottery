@@ -23,7 +23,8 @@ When obtaining the block hash, which is a *256-bit* hash, or 64 hexadecimal char
 1. Definition of the **game base**;
 2. Definition of the **block number**;
 3. Extraction of the **drawing seed number**;
-4. Generation of the drawing results.
+4. Generation of the **drawing roll number**;
+5. Generation of the drawing results.
 
 ## Definition of the Game Base
 
@@ -48,29 +49,29 @@ For block 0, when checking the hash, we find the value `000000000019d6689c085ae1
 ## Generation of Drawing Roll Number
 
 After obtaining the **drawing seed number**, reprocess it using the **SHA-256** algorithm. Each application of the algorithm produces a **drawing roll number**.
-Set the **Roll** value to determine which **drawing roll number** you want to generate. The **Roll** `0` is always equal to **drawing seed number**.
+Set the **Roll** value to determine which **drawing roll number** you want to generate. The **Roll** `0` is always equal to **drawing seed number**. The generator algorithm used must be public so that it can be publicly verified.
 
 ### Example
+
+For **drawing seed number** `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, the **drawing roll number** for each **roll** are:
+
+| Roll | Drawing Roll Number                                                |
+| ---- | ------------------------------------------------------------------ |
+| `0`  | `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f` |
+| `1`  | `7426ba0604c3f8682c7016b44673f85c5bd9da2fa6c1080810cf53ae320c9863` |
+| `2`  | `ae253ca2a54debcac7ecf414f6734f48c56421a08bb59182ff9f39a6fffdb588` |
+| `3`  | `4f28a6114fe8b446cca837ff8481082a42eb286f8e91c2ac3d6f226b83e8cd5a` |
+
+
+The generator algorithm is the Python function below.
 
 ```python
 import hashlib
 
 
 def new_drawing_roll_number(drawing_roll_number: str):
-    return = hashlib.sha256(bytes.fromhex(drawing_roll_number)).hexdigest()
+    return hashlib.sha256(bytes.fromhex(drawing_roll_number)).hexdigest()
 
-
-drawing_seed_number = "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
-print(f"roll 0:", drawing_seed_number)
-
-drawing_roll_number_1 = new_drawing_roll_number(drawing_seed_number)
-print(f"roll 1:", drawing_roll_number_1)
-
-drawing_roll_number_2 = new_drawing_roll_number(drawing_roll_number_1)
-print(f"roll 2:", drawing_roll_number_2)
-
-drawing_roll_number_3 = new_drawing_roll_number(drawing_roll_number_2)
-print(f"roll 3:", drawing_roll_number_3)
 ```
 
 ## Generation of the Drawing Results
@@ -79,7 +80,7 @@ After obtaining the **drawing roll number**, convert it to the **game base**. Th
 
 ### Example
 
-For the **drawing seed number** `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, **roll** `0`, the **drawing roll number** `is 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, for the base 6 game, the drawing results are `1`, `3`, `5`, `2`, `5`, `2`, `1`, `2`, `5`, `2`, `0`, `1`, `0`, `1`, `0`, `2`, `5`, `2`, `1`, `2`, `4`, `2`, `2`, `1`, `2`, `2`, `4`, `2`, `1`, `2`, `0`, `0`, `2`, `0`, `2`, `4`, `5`, `5`, `4`, `4`, `5`, `1`, `5`, `0`, `5`, `4`, `2`, `0`, `1`, `0`, `5`, `4`, `1`, `5`, `0`, `3`, `1`, `0`, `5`, `0`, `3`, `5`, `3`, `1`, `0`, `3`, `3`, `3`, `0`, `1`, `3`, `1`, `5`, `2`, `3`, `4`, `1`, `4`, `3`, `2`, `5`, `4`, `3`.
+For the **drawing seed number** `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, **roll** `0`, the **drawing roll number** is `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`, for the base 6 game, the drawing results are `1`, `3`, `5`, `2`, `5`, `2`, `1`, `2`, `5`, `2`, `0`, `1`, `0`, `1`, `0`, `2`, `5`, `2`, `1`, `2`, `4`, `2`, `2`, `1`, `2`, `2`, `4`, `2`, `1`, `2`, `0`, `0`, `2`, `0`, `2`, `4`, `5`, `5`, `4`, `4`, `5`, `1`, `5`, `0`, `5`, `4`, `2`, `0`, `1`, `0`, `5`, `4`, `1`, `5`, `0`, `3`, `1`, `0`, `5`, `0`, `3`, `5`, `3`, `1`, `0`, `3`, `3`, `3`, `0`, `1`, `3`, `1`, `5`, `2`, `3`, `4`, `1`, `4`, `3`, `2`, `5`, `4`, `3`.
 
 The conversion algorithm is the Python function below.
 
