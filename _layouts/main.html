@@ -20,21 +20,22 @@
         </script>
 
     </head>
-	<body class="w3-theme-d5">
+	<body class="w3-dark-gray">
 		<div id="loading">
 			 <div class="spinner"></div>
 		</div>
 
         <template id="site-menu">
             <div class="w3-bar">
-                <a class="w3-bar-item w3-text-theme w3-large" href="https://transparentlottery.com">
+                <span class="w3-bar-item w3-text-theme w3-large">
                     <b>{{ site.title }}</b>
-                </a>
+                </span>
                 <span class="w3-bar-item">
                     {{ site.description }}
                 </span>
+				<a class="w3-bar-item w3-button" href="#how-it-works">How it works</a>
 				<a class="w3-bar-item w3-button" href="{{ site.github_url }}">View on GitHub</a>
-				<a class="w3-bar-item w3-button w3-theme-d3 w3-hover-theme w3-round" href="https://transparentlottery.com/example">Check draw results for your custom lottery</a>
+				<a class="w3-bar-item w3-button w3-theme w3-hover-theme w3-round" href="https://transparentlottery.com/example">Check draw results</a>
             </div>
         </template>
 
@@ -95,7 +96,20 @@
             <site-menu></site-menu>
         </div>
 
-		<main class="w3-container w3-padding-64 w3-white">
+        <!-- Main -->
+        <div class="w3-container w3-padding-32 w3-center w3-white">
+            <p class="w3-xxxlarge">Public, verifiable lottery<br>powered by Bitcoin hash.</p>
+            <p class="w3-padding-32 w3-center w3-xlarge">
+                <!-- <a class="w3-bar-item w3-button w3-theme w3-round" href="#million-draw" >Participate in the Million Draw</a> -->
+                <a class="w3-bar-item w3-button w3-theme w3-round" href="https://transparentlottery.com/example">Check draw results</a>
+                <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#how-it-works">How it works</a>
+                <!-- <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#make-you-own-lottery">Make you own lottery</a> -->
+            </p>
+            <div class="w3-container w3-padding-64"></div>
+            <div class="w3-container w3-padding-64"></div>
+        </div>
+
+        <div id="how-it-works" class="w3-container w3-padding-64 w3-dark-grey w3-center">
 			<div class="w3-content">
 				{{ content }}
 			</div>
