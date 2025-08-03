@@ -4,13 +4,6 @@
 
 # Transparent Lottery
 
-<a href="https://example.transparentlottery.com" target="_blank">
-  <img src="https://img.shields.io/badge/ACCESS%20DRAW%20RESULTS%20NOW-FFA500?style=for-the-badge&logo=bitcoin&logoColor=white&labelColor=FFA500" />
-</a>
-
-[![Generic Example](https://img.shields.io/badge/ACCESS%20DRAW%20RESULTS%20NOW-FFA500?style=for-the-badge&logo=bitcoin&logoColor=white&labelColor=FFA500)](example.md)
-
-
 Generation of pseudo-random numbers from a public, verifiable algorithm using Bitcoin network hashes.
 
 With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that there will be no manipulation of the results. With this algorithm, anyone can verify the operation, making the process transparent.

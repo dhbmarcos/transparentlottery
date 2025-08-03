@@ -1,4 +1,4 @@
 ---
-layout: _layouts/example
-title: Transparent Lottery Generic Example
+layout: example
+title: Transparent Lottery | Custom Lottery
 ---

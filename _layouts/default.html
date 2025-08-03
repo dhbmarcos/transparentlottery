@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 		<link rel="stylesheet" href="/pages/code-theme.css">
 		<link rel="stylesheet" href="/pages/spinner.css">
-        <script src="/dist/latest.js"></script>
+        <script src="https://elementa.js.org/dist/0.3.0.js"></script>
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QGWBDVQ8B"></script>
@@ -17,7 +17,8 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-9QGWBDVQ8B');
-        </script>        
+        </script>
+
     </head>
 	<body class="w3-theme-d5">
 		<div id="loading">
@@ -32,7 +33,8 @@
                 <span class="w3-bar-item">
                     {{ site.description }}
                 </span>
-				<a class="w3-bar-item w3-button w3-theme-d3 w3-hover-theme w3-round" href="{{ site.github_url }}">View on GitHub</a>
+				<a class="w3-bar-item w3-button" href="{{ site.github_url }}">View on GitHub</a>
+				<a class="w3-bar-item w3-button w3-theme-d3 w3-hover-theme w3-round" href="https://transparentlottery.com/example">Check draw results for your custom lottery</a>
             </div>
         </template>
 
@@ -55,7 +57,7 @@
                     <p>You can use this QR code in your wallet to send us any value:</p>
                     <p>
                         <img id="donation-qrcode" src=""><br>
-                    </p>    
+                    </p>
                     <p>
                         <span id="donation-transaction" class="w3-small"></span><br>
                         <button id="donation-copy" class="w3-small w3-button w3-round w3-theme" onclick="copy_to_clipboard()">Copy transaction and paste in your wallet.</button>
@@ -68,7 +70,7 @@
                         const address     = "{{ site.donation_address }}";
                         const transaction = `bitcoin:${address}?label=${encodeURIComponent(message)}&message=${encodeURIComponent(message)}`;
                         const qrcode      = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(transaction)}`;
-                        
+
                         document.getElementById("donation-qrcode").src            = qrcode;
                         document.getElementById("donation-address").innerText     = address;
                         document.getElementById("donation-transaction").innerText = transaction;
