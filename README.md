@@ -1,8 +1,3 @@
----
-layout: main
-title: Transparent Lottery
----
-
 <p align="center">
   <img src="transparent-lottery.png" alt="Transparent Lottery Logo" width="300">
 </p>
