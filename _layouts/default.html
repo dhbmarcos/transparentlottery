@@ -97,7 +97,7 @@
         </div>
 
         <!-- Main -->
-        <div class="w3-container w3-padding-32 w3-center w3-white">
+        <div class="w3-padding-32 w3-center w3-white" style="height: 100vh">
             <p class="w3-xxxlarge">Public, verifiable lottery<br>powered by Bitcoin hash.</p>
             <p class="w3-padding-32 w3-center w3-xlarge">
                 <!-- <a class="w3-bar-item w3-button w3-theme w3-round" href="#million-draw" >Participate in the Million Draw</a> -->
@@ -105,13 +105,24 @@
                 <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#how-it-works">How it works</a>
                 <!-- <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#make-you-own-lottery">Make you own lottery</a> -->
             </p>
-            <div class="w3-container w3-padding-64"></div>
-            <div class="w3-container w3-padding-64"></div>
         </div>
 
         <div id="how-it-works" class="w3-container w3-padding-64 w3-dark-grey w3-center">
 			<div class="w3-content">
-				{{ content }}
+                <h1>How it works</h1>
+				<p>
+                    Generation of pseudo-random numbers from a public, verifiable algorithm using Bitcoin network hashes.
+                    With this innovation, betting games, raffles, and prizes can benefit from the transparency of the draws, ensuring that there will be no manipulation of the results.
+                    Anyone can verify the operation, making the process transparent.
+                </p>
+				<p>
+                    The Bitcoin network generates a new block approximately every 10 minutes. Each block has a unique identifier called a "hash". This hash is essentially a very long, random-looking string of letters and numbers.
+                    Transparent Lottery uses these unpredictable Bitcoin block hashes as the seed for its random number generation.
+                    This means that the outcome of any lottery draw is determined by a public, verifiable, and immutable source – the Bitcoin blockchain.
+                </p>
+                <p>
+                    For more information, see the <a class="w3-button w3-theme w3-round" href="https://transparentlottery.com/spec">specification</a>
+                </p>
 			</div>
 		</div>
 

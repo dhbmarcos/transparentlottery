@@ -12,4 +12,4 @@ The Bitcoin network generates a new block approximately every 10 minutes. Each b
 Transparent Lottery uses these unpredictable Bitcoin block hashes as the seed for its random number generation.
 This means that the outcome of any lottery draw is determined by a public, verifiable, and immutable source – the Bitcoin blockchain.
 
-For more details, please refer to the [process documentation](https://transparentlottery.com/process).
+For more details, please refer to the [specification](https://transparentlottery.com/spec).
