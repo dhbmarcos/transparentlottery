@@ -1,0 +1,15 @@
+title:            Transparent Lottery
+description:      Public, verifiable lottery powered by Bitcoin hash
+github_url:       https://github.com/dhbmarcos/transparentlottery
+donation_address: bc1qcjuxfykv08w5strmwxlerd8hq6c2v50aslxke8
+
+theme:       null
+markdown:    kramdown
+highlighter: rouge
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled:     true
+  collections: true
+
+theme: jekyll-theme-cayman
