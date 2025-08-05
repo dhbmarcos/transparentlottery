@@ -20,7 +20,7 @@
         </script>
 
     </head>
-	<body class="w3-dark-gray">
+	<body class="w3-black">
 		<div id="loading">
 			 <div class="spinner"></div>
 		</div>
@@ -33,9 +33,9 @@
                 <span class="w3-bar-item">
                     {{ site.description }}
                 </span>
-				<a class="w3-bar-item w3-button" href="https://transparentlottery.com/#how-it-works">How it works</a>
+				<a class="w3-bar-item w3-button" href="#how-it-works">How it works</a>
 				<a class="w3-bar-item w3-button" href="{{ site.github_url }}">View on GitHub</a>
-				<!-- <a class="w3-bar-item w3-button w3-theme w3-hover-theme w3-round" href="https://transparentlottery.com/example">Check draw results</a> -->
+				<a class="w3-bar-item w3-button w3-theme w3-hover-theme w3-round" href="https://transparentlottery.com/example">Example</a>
             </div>
         </template>
 
@@ -97,15 +97,17 @@
         </div>
 
         <!-- Main -->
-        <div id="how-it-works" class="w3-container w3-padding-64 w3-white">
+        <div class="w3-padding-32 w3-center w3-white">
 			<div class="w3-content">
 				{{ content }}
 			</div>
-		</main>
+        </div>
 
-		<footer class="w3-container w3-center w3-padding-64 w3-margin-top">
-			<site-menu></site-menu>
-			<p class="w3-tiny">Copyright (c) {{ site.time | date: "%Y" }} D. H. B. Marcos.<br>Deo omnis gloria.</p>
+        <footer class="w3-container w3-center w3-padding-64 w3-margin-top w3-black">
+		    <div>
+                <site-menu></site-menu>
+                <p class="w3-tiny">Copyright (c) {{ site.time | date: "%Y" }} D. H. B. Marcos.<br>Deo omnis gloria.</p>
+            </div>
 		</footer>
 	</body>
     <script>
