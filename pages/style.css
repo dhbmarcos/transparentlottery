@@ -1,0 +1,12 @@
+.div-l {
+    height: 200px;
+    background-image:  url("/pages/footer-bg-l.svg");
+    background-position: center bottom;
+    background-repeat: repeat-x;
+}
+.div-d {
+    height: 200px;
+    background-image:  url("/pages/footer-bg-d.svg");
+    background-position: center top;
+    background-repeat: repeat-x;
+}
