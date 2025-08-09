@@ -113,7 +113,7 @@
         <div class="w3-padding-32 w3-white">
             <div class="w3-content">
 
-                <div class="w3-card-4">
+                <div class="w3-card-4" style="width: 60%;">
                     <div class="w3-display-container w3-text-white">
                         <div id="draw-video-container" class="w3-animate-opacity">
                             <video id="draw-video" width="100%" muted autoplay playsinline loop>
@@ -149,14 +149,16 @@
                             <span class="w3-small">Roll applied in the draw seed number.</span>
                         </label>
                         <span id="roll-input" class="w3-input">0</span>
-                    </div>
-                    <div class="w3-padding">
-                        <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
+                        <div class="w3-padding">
+                            <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
+                        </div>
                     </div>
                     <div id="results-box" class="w3-padding w3-animate-opacity" hidden>
-                        <hr/>
                         <h2>Draw Results</h2>
                         <div id="result-balls" class="w3-container"></div>
+                        <div id="show-form-button" class="w3-padding" hidden>
+                            <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_form()">Check New Results</button>
+                        </div>
                     </div>
                 </div>
                 <script>
@@ -177,8 +179,20 @@
                     async function show_results()
                     {
                         clear_error()
-                        document.getElementById("results-box").style.display = "block";
+                        document.getElementById("form").style.display             = "none";
+                        document.getElementById("show-form-button").style.display = "none";
+                        document.getElementById("results-box").style.display      = "block";
                         await get_results();
+                        document.getElementById("show-form-button").style.display = "block";
+                        stop_video("results-video");
+                        start_video("draw-video");
+                    }
+
+                    async function show_form()
+                    {
+                        clear_error()
+                        document.getElementById("results-box").style.display = "none";
+                        document.getElementById("form").style.display        = "block";
                         stop_video("results-video");
                         start_video("draw-video");
                     }
