@@ -24,6 +24,21 @@
             gtag('config', 'G-9QGWBDVQ8B');
         </script>
 
+        <style>
+            .div-l {
+                height: 200px;
+                background-image:  url("../pages/footer-bg-l.svg");
+                background-position: center bottom;
+                background-repeat: repeat-x;
+            }
+            .div-d {
+                height: 200px;
+                background-image:  url("../pages/footer-bg-d.svg");
+                background-position: center top;
+                background-repeat: repeat-x;
+            }
+        </style>
+
     </head>
 	<body class="w3-black">
 		<div id="loading">
@@ -102,7 +117,7 @@
         </div>
 
         <!-- Main -->
-        <div class="w3-padding-32 w3-center w3-white" style="height: 100vh">
+        <div class="w3-padding-32 w3-center w3-white">
             <p class="w3-xxxlarge">Public, verifiable lottery<br>powered by Bitcoin hash.</p>
             <p class="w3-padding-32 w3-center w3-xlarge">
                 <!-- <a class="w3-bar-item w3-button w3-theme w3-round" href="#million-draw" >Participate in the Million Draw</a> -->
@@ -111,7 +126,8 @@
                 <!-- <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#make-you-own-lottery">Make you own lottery</a> -->
             </p>
         </div>
-
+        <div class="div-l w3-padding-32 w3-center w3-white">
+        </div>
         <div id="how-it-works" class="w3-container w3-padding-64 w3-dark-grey w3-center">
 			<div class="w3-content">
                 <h1>How it works</h1>
@@ -131,7 +147,8 @@
 			</div>
 		</div>
 
-        <footer class="w3-container w3-center w3-padding-64 w3-margin-top w3-black">
+        <footer class="div-d w3-container w3-center w3-padding-64 w3-margin-top w3-black">
+            <div class="w3-padding-64"></div>
 		    <div>
                 <site-menu></site-menu>
                 <p class="w3-tiny">Copyright (c) {{ site.time | date: "%Y" }} D. H. B. Marcos.<br>Deo omnis gloria.</p>
