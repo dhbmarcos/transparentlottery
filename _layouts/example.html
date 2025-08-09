@@ -110,60 +110,54 @@
 
         <!-- Main -->
         <div class="w3-padding-32 w3-white">
-			<div class="w3-content">
-                <div class="w3-container container w3-padding-64">
-                    <div class="w3-container container w3-white w3-padding" >
-                        <div class="w3-padding">
-                            <h1 class="w3-text-blue w3-center">Transparent Lottery Example</h1>
+            <div class="w3-content">
 
-                            <div id="draw-video-container" class="w3-container w3-center w3-animate-opacity">
-                                <video id="draw-video" class="w3-round-xlarge" width="75%" muted autoplay playsinline loop>
-                                    <source src="https://example.transparentlottery.com/draw.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div id="results-video-container" class="w3-container w3-center w3-animate-opacity" hidden>
-                                <video id="results-video" class="w3-round-xlarge" width="75%" loop muted>
-                                    <source src="https://example.transparentlottery.com/results.mp4" type="video/mp4">
-                                </video>
-                            </div>
-
-                            <p class="w3-center">Understand how it works at <a href="https://transparentlottery.com">https://transparentlottery.com</a>.</p>
-
-                            <div id="form" class="w3-padding w3-animate-opacity" hidden>
-                                <H2>Check Draw Results</H2>
-
-                                <label class="w3-margin-top">
-                                    <b class="w3-text-orange ">Game Base</b><br/>
-                                    <span class="w3-small">Number of options for each game play.</span>
-                                </label>
-                                <input class="w3-input" type="number" id="base-input" min="2" max="256" value="6",>
-
-                                <label class="w3-margin-top">
-                                    <b class="w3-text-orange ">Bitcoin Block</b><br/>
-                                    <span class="w3-small">Height of Bitcoin block.</span>
-                                </label>
-                                <input class="w3-input" type="number" id="block-input" min="0" value="0">
-
-                                <label class="w3-margin-top">
-                                    <b class="w3-text-orange ">Roll Number</b><br/>
-                                    <span class="w3-small">Roll applied in the draw seed number.</span>
-                                </label>
-                                <input class="w3-input" type="number" id="roll-input" min="0" value="0" readonly>
-
-                            </div>
+                <div class="w3-card-4">
+                    <div class="w3-display-container w3-text-white">
+                        <div id="draw-video-container" class="w3-animate-opacity">
+                            <video id="draw-video" width="100%" muted autoplay playsinline loop>
+                                <source src="https://example.transparentlottery.com/draw.mp4" type="video/mp4">
+                            </video>
                         </div>
-                        <div class="w3-padding">
-                            <button class="w3-button w3-orange w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
+                        <div id="results-video-container" class="w3-animate-opacity" hidden>
+                            <video id="results-video" width="100%" loop muted>
+                                <source src="https://example.transparentlottery.com/results.mp4" type="video/mp4">
+                            </video>
                         </div>
-
-                        <div id="results-box" class="w3-padding w3-center w3-animate-opacity" hidden>
-                            <h3>Draw Results</h3>
-                            <div id="result-balls" class="w3-container">
-                            </div>
+                        <div class="w3-display-bottomleft w3-padding">
+                            <h1>TRANSPARENT LOTTERY EXAMPLE</h1>
                         </div>
                     </div>
-                </div>
+                    <div id="form" class="w3-padding w3-animate-opacity" hidden>
+                        <H2>Check A Draw Results</H2>
 
+                        <label class="w3-margin-top">
+                            <b class="w3-text-theme">Game Base</b><br/>
+                            <span class="w3-small">Number of options for each game play.</span>
+                        </label>
+                        <input type="number" id="base-input" class="w3-input" min="2" max="256" value="6",>
+
+                        <label class="w3-margin-top">
+                            <b class="w3-text-theme">Bitcoin Block</b><br/>
+                            <span class="w3-small">Height of Bitcoin block.</span>
+                        </label>
+                        <input type="number" id="block-input" class="w3-input" min="0" value="0">
+
+                        <label class="w3-margin-top">
+                            <b class="w3-text-theme">Roll Number</b><br/>
+                            <span class="w3-small">Roll applied in the draw seed number.</span>
+                        </label>
+                        <span id="roll-input" class="w3-input">0</span>
+                    </div>
+                    <div class="w3-padding">
+                        <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
+                    </div>
+                    <div id="results-box" class="w3-padding w3-animate-opacity" hidden>
+                        <hr/>
+                        <h2>Draw Results</h2>
+                        <div id="result-balls" class="w3-container"></div>
+                    </div>
+                </div>
                 <script>
 
                     async function set_block_input_default() {
