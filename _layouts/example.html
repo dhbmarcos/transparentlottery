@@ -112,25 +112,10 @@
         <!-- Main -->
         <div class="w3-padding-32 w3-white">
             <div class="w3-content">
-
-                <div class="w3-card-4" style="width: 60%;">
-                    <div class="w3-display-container w3-text-white">
-                        <div id="draw-video-container" class="w3-animate-opacity">
-                            <video id="draw-video" width="100%" muted autoplay playsinline loop>
-                                <source src="https://example.transparentlottery.com/draw.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div id="results-video-container" class="w3-animate-opacity" hidden>
-                            <video id="results-video" width="100%" loop muted>
-                                <source src="https://example.transparentlottery.com/results.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="w3-display-bottomleft w3-padding">
-                            <h1>TRANSPARENT LOTTERY EXAMPLE</h1>
-                        </div>
-                    </div>
-                    <div id="form" class="w3-padding w3-animate-opacity" hidden>
-                        <H2>Check A Draw Results</H2>
+                <div class="w3-padding">
+                    <h1>Transparent Lottery Example</h1>
+                    <div id="form" class="w3-animate-opacity" hidden>
+                        <H2>Game Settings</H2>
 
                         <label class="w3-margin-top">
                             <b class="w3-text-theme">Game Base</b><br/>
@@ -149,203 +134,178 @@
                             <span class="w3-small">Roll applied in the draw seed number.</span>
                         </label>
                         <span id="roll-input" class="w3-input">0</span>
-                        <div class="w3-padding">
-                            <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
-                        </div>
+                        <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
                     </div>
-                    <div id="results-box" class="w3-padding w3-animate-opacity" hidden>
+                    <div id="results-box" class="w3-animate-opacity" hidden>
                         <h2>Draw Results</h2>
                         <div id="result-balls" class="w3-container"></div>
-                        <div id="show-form-button" class="w3-padding" hidden>
+                        <div id="show-form-button" hidden>
                             <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_form()">Check New Results</button>
                         </div>
                     </div>
                 </div>
-                <script>
-
-                    async function set_block_input_default() {
-                        try {
-                            let response = await fetch("https://mempool.space/api/blocks/tip/height");
-                            const height = await response.json();
-                            document.getElementById("block-input").value = height;
-                        } catch(error) {
-                            console.error(error);
-                            document.getElementById("block-input").value = "0";
-                        }
-                        document.getElementById("form").style.display = "block";
-                    }
-                    set_block_input_default();
-
-                    async function show_results()
-                    {
-                        clear_error()
-                        document.getElementById("form").style.display             = "none";
-                        document.getElementById("show-form-button").style.display = "none";
-                        document.getElementById("results-box").style.display      = "block";
-                        await get_results();
-                        document.getElementById("show-form-button").style.display = "block";
-                        stop_video("results-video");
-                        start_video("draw-video");
-                    }
-
-                    async function show_form()
-                    {
-                        clear_error()
-                        document.getElementById("results-box").style.display = "none";
-                        document.getElementById("form").style.display        = "block";
-                        stop_video("results-video");
-                        start_video("draw-video");
-                    }
-
-                    function clear_error()
-                    {
-                        clearTimeout(window.timeout);
-                        stop_video("results-video");
-                        start_video("draw-video");
-                        document.getElementById("result-balls").innerHTML = "";
-                    }
-
-                    async function get_results()
-                    {
-                        let results_data = await draw();
-                        stop_video("draw-video")
-                        start_video("results-video");
-                        let results_balls = document.getElementById("result-balls");
-                        let index_value   = 0;
-
-                        for (let result of results_data.results) {
-                            await sleep(8000);
-                            let result_ball = document.createElement("b");
-                            result_ball.textContent = ++result;
-                            result_ball.classList   = "w3-tag w3-margin-right w3-margin-bottom w3-round w3-card w3-round-xxlarge w3-bold w3-large w3-orange w3-text-black";
-                            results_balls.appendChild(result_ball);
-                        }
-                    }
-
-                    async function draw()
-                    {
-                        let input   = get_input();
-                        let block   = await get_block(input.block);
-                        let results = generate_draw_numbers(block.hash, input.base);
-                        height  = input.block;
-                        hash    = block.hash;
-                        instant = block.instant;
-                        return {height, hash, results};
-                    }
-
-
-                    function get_input()
-                    {
-                        let block = document.getElementById("block-input").value;
-                        let base  = document.getElementById("base-input").value;
-                        console.log("block:", block);
-                        console.log("base:",  base);
-                        return {block, base};
-                    }
-
-                    async function get_block(height)
-                    {
-                        let hash    = null;
-                        let instant = null;
-                        try {
-                            let response = await fetch(`https://mempool.space/api/block-height/${height}`);
-                            if (!response.ok) {
-                                if (response.status == 404) {
-                                    return block_estimate(height);
-                                }
-                                throw `Failed to get block ${height}: Error ${response.status}: ${await response.text()}`;
-                            }
-                            hash = await response.text();
-
-                            response = await fetch(`https://mempool.space/api/block/${hash}`);
-                            if (!response.ok) {
-                                throw `Failed to get block ${hash}: ${response.statusText}`;
-                            }
-
-                            const data      = await response.json();
-                            const timestamp = data.timestamp;
-                            instant         = new Date(timestamp * 1000).toLocaleString();
-                        } catch (error) {
-                            return show_error(error);
-                        }
-
-                        console.log("hash:",    hash);
-                        console.log("instant:", instant);
-                        return {hash, instant};
-                    }
-
-                    function show_error(error)
-                    {
-                        console.error(error);
-                        document.getElementById("results-box").style.display = "block";
-                        document.getElementById("result-balls").innerHTML = error;
-                    }
-
-                    async function block_estimate(height) {
-                        let response         = await fetch("https://mempool.space/api/blocks/tip/height");
-                        const current_height = await response.json();
-
-                        response                = await fetch("https://mempool.space/api/blocks");
-                        const blocks            = await response.json();
-                        const current_timestamp = blocks[0].timestamp;
-                        const delta_blocks      = height - current_height;
-
-                        if (delta_blocks < 0) {
-                            return show_error(`Block ${height} already mined.`);
-                        }
-
-                        const seconds = delta_blocks * 10 * 60;
-                        const date = new Date((current_timestamp + seconds) * 1000);
-                        return show_error(`<h4>Wait Draw</h4><p>The block ${height} is not mined. Current block is ${current_height}. Please, wait mining and return back later.</p><p>Draw estimation:</p><p><b>${date.toLocaleString()}</b></p>`);
-                    }
-
-                    function generate_draw_numbers(hash, base)
-                    {
-                        try {
-                            let seed = hash.padStart(64, '0');
-                            console.log("seed:", seed);
-
-                            seed = BigInt('0x' + seed);
-                            base = BigInt(base);
-
-                            let numbers = [];
-                            while (seed > 0) {
-                                numbers.push(Number(seed % base));
-                                seed = seed / base;
-                            }
-
-                            results = numbers.reverse();
-                            console.log("results:", results);
-                            return results;
-                        } catch (error) {
-                            console.error(hash, error);
-                            return `${hash} ${error}`;
-                        }
-                    }
-
-                    function start_video(video) {
-                        document.getElementById(`${video}-container`).style.display = "block";
-                        video = document.getElementById(video);
-                        video.currentTime = 0;
-                        video.play();
-                    }
-
-                    function stop_video(video) {
-                        document.getElementById(`${video}-container`).style.display = "none";
-                        video = document.getElementById(video);
-                        video.pause();
-                        video.currentTime = 0;
-                    }
-
-                    function sleep(ms) {
-                        return new Promise(function(resolve) {
-                            window.timeout = setTimeout(resolve, ms);
-                        });
-                    }
-
-                </script>
 			</div>
         </div>
+        <script>
+            async function set_block_input_default() {
+                try {
+                    let response = await fetch("https://mempool.space/api/blocks/tip/height");
+                    const height = await response.json();
+                    document.getElementById("block-input").value = height;
+                } catch(error) {
+                    console.error(error);
+                    document.getElementById("block-input").value = "0";
+                }
+                document.getElementById("form").style.display = "block";
+            }
+            set_block_input_default();
+
+            async function show_results()
+            {
+                clear_error()
+                document.getElementById("form").style.display             = "none";
+                document.getElementById("show-form-button").style.display = "none";
+                document.getElementById("results-box").style.display      = "block";
+                await get_results();
+                document.getElementById("show-form-button").style.display = "block";
+            }
+
+            async function show_form()
+            {
+                clear_error()
+                document.getElementById("results-box").style.display = "none";
+                document.getElementById("form").style.display        = "block";
+            }
+
+            function clear_error()
+            {
+                clearTimeout(window.timeout);
+                document.getElementById("result-balls").innerHTML = "";
+            }
+
+            async function get_results()
+            {
+                let results_data = await draw();
+                let results_balls = document.getElementById("result-balls");
+                let index_value   = 0;
+
+                for (let result of results_data.results) {
+                    await sleep(100);
+                    let result_ball = document.createElement("b");
+                    result_ball.textContent = ++result;
+                    result_ball.classList   = "w3-tag w3-margin-right w3-margin-bottom w3-round w3-card w3-round-xxlarge w3-bold w3-large w3-orange w3-text-black";
+                    results_balls.appendChild(result_ball);
+                }
+            }
+
+            async function draw()
+            {
+                let input   = get_input();
+                let block   = await get_block(input.block);
+                let results = generate_draw_numbers(block.hash, input.base);
+                height  = input.block;
+                hash    = block.hash;
+                instant = block.instant;
+                return {height, hash, results};
+            }
+
+
+            function get_input()
+            {
+                let block = document.getElementById("block-input").value;
+                let base  = document.getElementById("base-input").value;
+                console.log("block:", block);
+                console.log("base:",  base);
+                return {block, base};
+            }
+
+            async function get_block(height)
+            {
+                let hash    = null;
+                let instant = null;
+                try {
+                    let response = await fetch(`https://mempool.space/api/block-height/${height}`);
+                    if (!response.ok) {
+                        if (response.status == 404) {
+                            return block_estimate(height);
+                        }
+                        throw `Failed to get block ${height}: Error ${response.status}: ${await response.text()}`;
+                    }
+                    hash = await response.text();
+
+                    response = await fetch(`https://mempool.space/api/block/${hash}`);
+                    if (!response.ok) {
+                        throw `Failed to get block ${hash}: ${response.statusText}`;
+                    }
+
+                    const data      = await response.json();
+                    const timestamp = data.timestamp;
+                    instant         = new Date(timestamp * 1000).toLocaleString();
+                } catch (error) {
+                    return show_error(error);
+                }
+
+                console.log("hash:",    hash);
+                console.log("instant:", instant);
+                return {hash, instant};
+            }
+
+            function show_error(error)
+            {
+                console.error(error);
+                document.getElementById("results-box").style.display = "block";
+                document.getElementById("result-balls").innerHTML = error;
+            }
+
+            async function block_estimate(height) {
+                let response         = await fetch("https://mempool.space/api/blocks/tip/height");
+                const current_height = await response.json();
+
+                response                = await fetch("https://mempool.space/api/blocks");
+                const blocks            = await response.json();
+                const current_timestamp = blocks[0].timestamp;
+                const delta_blocks      = height - current_height;
+
+                if (delta_blocks < 0) {
+                    return show_error(`Block ${height} already mined.`);
+                }
+
+                const seconds = delta_blocks * 10 * 60;
+                const date = new Date((current_timestamp + seconds) * 1000);
+                return show_error(`<h4>Wait Draw</h4><p>The block ${height} is not mined. Current block is ${current_height}. Please, wait mining and return back later.</p><p>Draw estimation:</p><p><b>${date.toLocaleString()}</b></p>`);
+            }
+
+            function generate_draw_numbers(hash, base)
+            {
+                try {
+                    let seed = hash.padStart(64, '0');
+                    console.log("seed:", seed);
+
+                    seed = BigInt('0x' + seed);
+                    base = BigInt(base);
+
+                    let numbers = [];
+                    while (seed > 0) {
+                        numbers.push(Number(seed % base));
+                        seed = seed / base;
+                    }
+
+                    results = numbers.reverse();
+                    console.log("results:", results);
+                    return results;
+                } catch (error) {
+                    console.error(hash, error);
+                    return `${hash} ${error}`;
+                }
+            }
+
+            function sleep(ms) {
+                return new Promise(function(resolve) {
+                    window.timeout = setTimeout(resolve, ms);
+                });
+            }
+
+        </script>
 
         <footer class="div-d w3-container w3-center w3-padding-64 w3-margin-top w3-black">
             <div class="w3-padding-64"></div>
