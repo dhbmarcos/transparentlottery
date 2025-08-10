@@ -299,8 +299,9 @@
                 }
             }
 
-            function sleep(ms) {
-                return new Promise(function(resolve) {
+            async function sleep(ms)
+            {
+                await new Promise(function(resolve) {
                     window.timeout = setTimeout(resolve, ms);
                 });
             }
