@@ -32,16 +32,22 @@
 		</div>
 
         <template id="site-menu">
-            <div class="w3-bar">
-                <a class="w3-bar-item w3-button w3-text-theme w3-large" href="https://transparentlottery.com">
-                    <b>{{ site.title }}</b>
-                </a>
-                <span class="w3-bar-item">
-                    {{ site.description }}
-                </span>
-				<a class="w3-bar-item w3-button" href="https://transparentlottery.com/#how-it-works">How it works</a>
-				<a class="w3-bar-item w3-button" href="{{ site.github_url }}">View on GitHub</a>
-				<a class="w3-bar-item w3-button w3-theme w3-round" href="https://transparentlottery.com/example">Example</a>
+            <div class="w3-container">
+                <div class="w3-bar">
+                    <a class="w3-bar-item w3-button w3-text-theme w3-large" href="https://transparentlottery.com">
+                        <b>{{ site.title }}</b>
+                    </a>
+                    <span class="w3-bar-item">
+                        {{ site.description }}
+                    </span>
+                </div>
+            </div>
+            <div class="w3-container">
+                <div class="w3-bar">
+                    <a class="w3-bar-item w3-button" href="https://transparentlottery.com/#how-it-works">How it works</a>
+                    <a class="w3-bar-item w3-button" href="{{ site.github_url }}">View on GitHub</a>
+                    <a class="w3-bar-item w3-button w3-theme w3-round" href="https://transparentlottery.com/example">Example</a>
+                </div>
             </div>
         </template>
 
