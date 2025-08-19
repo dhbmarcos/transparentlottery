@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/pages/code-theme.css">
 		<link rel="stylesheet" href="/pages/spinner.css">
 		<link rel="stylesheet" href="/pages/style.css">
-        <script src="https://elementa.js.org/dist/0.3.0.js"></script>
+        <script src="https://elementa.js.org/dist/0.4.0.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <style>
             video {
@@ -21,6 +21,16 @@
             html {
                 scroll-behavior: smooth;
             }
+
+            .hash {
+                background-color: #f1f1f1;
+                color: #333;
+                font-family: monospace;
+                padding: 0.2em 0.4em;
+                border-radius: 4px;
+                overflow-wrap: anywhere;
+            }
+
         </style>
 
         <!-- Google tag (gtag.js) -->
@@ -57,6 +67,8 @@
                 </div>
             </div>
         </template>
+
+        <template id="result-description" tag="li"></template>
 
         <!-- Donation -->
         <a class="w3-button w3-block w3-theme w3-hover-theme" onclick="document.getElementById('donation').style.display='block'">{{ site.title }} need your support!</a>
@@ -144,7 +156,12 @@
                     </div>
                     <div id="results-box" class="w3-animate-opacity" hidden>
                         <h2>Draw Results</h2>
-                        <div id="result-balls" class="w3-container"></div>
+                        <h3>Process Description</h3>
+                        <div class="w3-container">
+                            <ul id="result-descriptions" class="w3-ul"></ul>
+                        </div>
+                        <h3 id="result-descriptions-title"></h3>
+                        <p id="result-balls" class="w3-container"></p>
                         <div id="show-form-button" hidden>
                             <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_form()">Check New Results</button>
                         </div>
@@ -153,7 +170,8 @@
 			</div>
         </div>
         <script>
-            async function set_block_input_default() {
+            async function set_block_input_default()
+            {
                 try {
                     let response = await fetch("https://mempool.space/api/blocks/tip/height");
                     const height = await response.json();
@@ -174,13 +192,6 @@
                 document.getElementById("results-box").style.display      = "block";
                 await get_results();
                 document.getElementById("show-form-button").style.display = "block";
-            }
-
-            async function show_form()
-            {
-                clear_error()
-                document.getElementById("results-box").style.display = "none";
-                document.getElementById("form").style.display        = "block";
             }
 
             function clear_error()
@@ -214,9 +225,10 @@
                 let hash    = block.hash;
                 let instant = block.instant;
                 let results = await generate_draw_numbers(hash, base, roll);
+                add_result_description(`<i>We will convert Roll Draw Number to base ${base} to get the Draw Numbers.</i>`);
+                document.getElementById("result-descriptions-title").innerHTML = `Draw Numbers (Block ${height}, Roll ${roll}, Base ${base})`
                 return {height, hash, results};
             }
-
 
             function get_input()
             {
@@ -232,6 +244,9 @@
 
             async function get_block(height)
             {
+                add_result_description(`<i>We will get the hash of block ${height}.</i>`);
+                add_result_description(`Getting hash of <b>Block ${height}</b>...`);
+
                 let hash    = null;
                 let instant = null;
                 try {
@@ -256,9 +271,17 @@
                     return show_error(error);
                 }
 
+                add_result_description(`<i>The hash of block is Seed Draw Number</i>.`);
+                add_result_description(`<b>Seed Draw Number</b> (hash of height ${height}, mined at ${instant}): <spam class="hash">${hash}</spam>`);
                 console.log("hash:",    hash);
                 console.log("instant:", instant);
                 return {hash, instant};
+            }
+
+            function add_result_description(description)
+            {
+                console.log(description);
+                document.getElementById("result-descriptions").appendChild(elementa.render.tag("result-description", null, description));
             }
 
             function show_error(error)
@@ -287,6 +310,9 @@
             }
 
             async function generate_drawing_rool_number(seed, roll) {
+                add_result_description(`<i>We will apply the SHA256 hash function ${roll} time to get Draw Rool Number.</i>`);
+                add_result_description(`<b>Draw Rool Number 0</b>: <spam class="hash">${seed}</spam>.`);
+
                 let result = seed;
                 console.log("rolling", seed, roll, "x");
                 console.log("roll: 0", "draw roll number:", result);
@@ -301,6 +327,7 @@
                         return value.toString(16).padStart(2, "0");
                     }).join("");
                     console.log("roll:", current_roll + 1, "draw roll number:", result);
+                    add_result_description(`<b>Draw Rool Number ${current_roll + 1}</b>: <spam class="hash">${result}</spam>.`);
                 }
 
                 return result;
@@ -338,6 +365,12 @@
                 });
             }
 
+            async function show_form()
+            {
+                clear_error()
+                document.getElementById("results-box").style.display = "none";
+                document.getElementById("form").style.display        = "block";
+            }
         </script>
 
         <footer class="div-d w3-container w3-center w3-padding-64 w3-margin-top w3-black">
