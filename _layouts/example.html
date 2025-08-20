@@ -157,7 +157,6 @@
                     <h1>Transparent Lottery Example</h1>
                     <div id="form" class="w3-animate-opacity" hidden>
                         <H2>Game Settings</H2>
-                        <p class="w3-small">The results are incremented by one to be more intuitive, as the first result is 0.</p>
                         <label class="w3-margin-top">
                             <b class="w3-text-theme">Game Base</b><br/>
                             <span class="w3-small">Number of options for each game play.</span>
@@ -197,15 +196,6 @@
 			</div>
         </div>
         <script>
-            function toogle(id) {
-                let element = document.getElementById(id);
-                if (element.className.indexOf("w3-show") == -1) {
-                    element.className += " w3-show";
-                } else {
-                    element.className = element.className.replace(" w3-show", "");
-                }
-            }
-
             async function set_block_input_default()
             {
                 try {
@@ -220,9 +210,18 @@
             }
             set_block_input_default();
 
+            function toogle(id) {
+                let element = document.getElementById(id);
+                if (element.className.indexOf("w3-show") == -1) {
+                    element.className += " w3-show";
+                } else {
+                    element.className = element.className.replace(" w3-show", "");
+                }
+            }
+
             async function show_results()
             {
-                clear_error()
+                clear_results();
                 document.getElementById("form").style.display             = "none";
                 document.getElementById("show-form-button").style.display = "none";
                 document.getElementById("results-box").style.display      = "block";
@@ -230,10 +229,11 @@
                 document.getElementById("show-form-button").style.display = "block";
             }
 
-            function clear_error()
+            function clear_results()
             {
                 clearTimeout(window.timeout);
                 document.getElementById("result-balls").innerHTML = "";
+                document.getElementById("result-descriptions").innerHTML = "";
             }
 
             async function get_results()
@@ -259,7 +259,7 @@
                 let hash    = block.hash;
                 let instant = block.instant;
                 let results = await generate_draw_numbers(hash, base, roll);
-                add_result_description(`<i>We will convert Roll Draw Number to base ${base} to get the Draw Numbers.</i>`);
+                add_result_description(`<i>We added 1 to each result to be more intuitive, as the first possibity is 0.</i>`);
                 document.getElementById("result-balls").appendChild(elementa.render.tag("result-resume", {height, roll, base}));
                 return {height, hash, results};
             }
@@ -278,8 +278,7 @@
 
             async function get_block(height)
             {
-                add_result_description(`<i>We will get the hash of block ${height}.</i>`);
-                add_result_description(`Getting hash of <b>Block ${height}</b>...`);
+                add_result_description(`<i>Get the hash of block ${height}.</i>`);
 
                 let hash    = null;
                 let instant = null;
@@ -305,8 +304,7 @@
                     return show_error(error);
                 }
 
-                add_result_description(`<i>The hash of block is Seed Draw Number</i>.`);
-                add_result_description(`<b>Seed Draw Number</b> (hash of height ${height}, mined at ${instant}): <spam class="hash">${hash}</spam>`);
+                add_result_description(`<i>The hash of block ${height} is Seed Draw Number: </i><spam class="hash">${hash}</spam>. <i>It was mined at ${instant}.</i>`);
                 console.log("hash:",    hash);
                 console.log("instant:", instant);
                 return {hash, instant};
@@ -344,8 +342,12 @@
             }
 
             async function generate_drawing_rool_number(seed, roll) {
-                add_result_description(`<i>We will apply the SHA256 hash function ${roll} time to get Draw Rool Number.</i>`);
-                add_result_description(`<b>Draw Rool Number 0</b>: <spam class="hash">${seed}</spam>.`);
+
+                add_result_description(`<i>Draw Rool Number 0 is the Seed Draw Number.</i>`);
+
+                if (roll > 0) {
+                    add_result_description(`<i>Apply the SHA256 hash function ${roll} time to get Draw Rool Number.</i>`);
+                }
 
                 let result = seed;
                 console.log("rolling", seed, roll, "x");
@@ -361,7 +363,7 @@
                         return value.toString(16).padStart(2, "0");
                     }).join("");
                     console.log("roll:", current_roll + 1, "draw roll number:", result);
-                    add_result_description(`<b>Draw Rool Number ${current_roll + 1}</b>: <spam class="hash">${result}</spam>.`);
+                    add_result_description(`<i>Draw Rool Number ${current_roll + 1}: <spam class="hash">${result}</spam>.`);
                 }
 
                 return result;
@@ -372,15 +374,12 @@
                 hash = await generate_drawing_rool_number(hash, roll);
                 try {
                     let seed = hash.padStart(64, '0');
-                    add_result_description(`<i>We addded zeros to the left of the Seed Draw Number to ensure it has 64 characters.</i>`);
-                    add_result_description(`<b>Seed Draw Number (with left zeros)</b>: <spam class="hash">${seed}</spam>.`);
+                    add_result_description(`<i>Add zeros to the left of the Seed Draw Number to ensure it has 64 characters: <spam class="hash">${seed}</spam>`);
 
                     seed = BigInt('0x' + seed);
                     base = BigInt(base);
-                    add_result_description(`<i>We convert the Seed Draw Number to base 10 for further calculations using JavaScript.</i>`);
-                    add_result_description(`<b>Seed Draw Number (base 10)</b>: <spam class="hash">${seed}</spam>.`);
+                    add_result_description(`<i>Convert the Seed Draw Number to base 10 for further calculations using JavaScript: <spam class="hash">${seed}</spam>.`);
 
-                    add_result_description(`<i>We convert the Seed Draw Number to base ${base} dividing it by the base. Each Draw Number is the rest of the division.</i>`);
                     let numbers = [];
                     while (seed > 0) {
                         numbers.push(Number(seed % base));
@@ -388,7 +387,7 @@
                     }
 
                     results = numbers.reverse();
-                    add_result_description(`<b>Draw Numbers (base ${base})</b>: <spam class="hash">${results}</spam>.`);
+                    add_result_description(`<i>Convert the Seed Draw Number to Game Base dividing it by ${base} to get Draw Numbers. Each Draw Number is the integer part of the division:</i> <spam class="hash">${results}</spam>`);
                     return results;
                 } catch (error) {
                     console.error(hash, error);
@@ -405,7 +404,7 @@
 
             async function show_form()
             {
-                clear_error()
+                clear_results()
                 document.getElementById("results-box").style.display = "none";
                 document.getElementById("form").style.display        = "block";
             }
