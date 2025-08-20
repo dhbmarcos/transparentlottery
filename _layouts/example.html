@@ -70,6 +70,29 @@
 
         <template id="result-description" tag="li"></template>
 
+        <template id="result-resume">
+            <div class="w3-padding">
+                <table class="w3-table w3-bordered" style="width: 15vw;">
+                    <tr>
+                        <td>Bitcoin Block</td>
+                        <td id="height"></td>
+                    </tr>
+                    <tr>
+                        <td>Roll Number</td>
+                        <td id="roll"></td>
+                    </tr>
+                    <tr>
+                        <td>Game Base</td>
+                        <td id="base"></td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="ball" tab="b">
+            <span id="value" class="w3-tag w3-margin-right w3-margin-bottom w3-round w3-card w3-round-xxlarge w3-bold w3-large w3-theme"></span>
+        </template>
+
         <!-- Donation -->
         <a class="w3-button w3-block w3-theme w3-hover-theme" onclick="document.getElementById('donation').style.display='block'">{{ site.title }} need your support!</a>
         <div id="donation" class="w3-modal">
@@ -155,13 +178,17 @@
                             <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_results()">Check Results</button>
                     </div>
                     <div id="results-box" class="w3-animate-opacity" hidden>
-                        <h2>Draw Results</h2>
-                        <h3>Process Description</h3>
-                        <div class="w3-container">
-                            <ul id="result-descriptions" class="w3-ul"></ul>
+                        <button class="w3-button w3-light-gray w3-margin-top w3-block w3-round" onclick="toogle('explanation')">Explanation</button>
+                        <h2>Explanation Results</h2>
+                        <div id="explanation" class="w3-hide">
+                            <div class="w3-container">
+                                <ul id="result-descriptions" class="w3-ul"></ul>
+                            </div>
                         </div>
-                        <h3 id="result-descriptions-title"></h3>
-                        <p id="result-balls" class="w3-container"></p>
+                        <h2>Draw Results</h2>
+                        <div class="w3-padding">
+                            <p id="result-balls" class="w3-container"></p>
+                        </div>
                         <div id="show-form-button" hidden>
                             <button class="w3-button w3-theme w3-text-white w3-margin-top w3-block w3-round" onclick="show_form()">Check New Results</button>
                         </div>
@@ -170,6 +197,15 @@
 			</div>
         </div>
         <script>
+            function toogle(id) {
+                let element = document.getElementById(id);
+                if (element.className.indexOf("w3-show") == -1) {
+                    element.className += " w3-show";
+                } else {
+                    element.className = element.className.replace(" w3-show", "");
+                }
+            }
+
             async function set_block_input_default()
             {
                 try {
@@ -208,9 +244,7 @@
 
                 for (let result of results_data.results) {
                     await sleep(100);
-                    let result_ball = document.createElement("b");
-                    result_ball.textContent = ++result;
-                    result_ball.classList   = "w3-tag w3-margin-right w3-margin-bottom w3-round w3-card w3-round-xxlarge w3-bold w3-large w3-orange w3-text-black";
+                    let result_ball = elementa.render.tag("ball", {"value": ++result});
                     results_balls.appendChild(result_ball);
                 }
             }
@@ -226,7 +260,7 @@
                 let instant = block.instant;
                 let results = await generate_draw_numbers(hash, base, roll);
                 add_result_description(`<i>We will convert Roll Draw Number to base ${base} to get the Draw Numbers.</i>`);
-                document.getElementById("result-descriptions-title").innerHTML = `Draw Numbers (Block ${height}, Roll ${roll}, Base ${base})`
+                document.getElementById("result-balls").appendChild(elementa.render.tag("result-resume", {height, roll, base}));
                 return {height, hash, results};
             }
 
@@ -338,11 +372,15 @@
                 hash = await generate_drawing_rool_number(hash, roll);
                 try {
                     let seed = hash.padStart(64, '0');
-                    console.log("seed:", seed);
+                    add_result_description(`<i>We addded zeros to the left of the Seed Draw Number to ensure it has 64 characters.</i>`);
+                    add_result_description(`<b>Seed Draw Number (with left zeros)</b>: <spam class="hash">${seed}</spam>.`);
 
                     seed = BigInt('0x' + seed);
                     base = BigInt(base);
+                    add_result_description(`<i>We convert the Seed Draw Number to base 10 for further calculations using JavaScript.</i>`);
+                    add_result_description(`<b>Seed Draw Number (base 10)</b>: <spam class="hash">${seed}</spam>.`);
 
+                    add_result_description(`<i>We convert the Seed Draw Number to base ${base} dividing it by the base. Each Draw Number is the rest of the division.</i>`);
                     let numbers = [];
                     while (seed > 0) {
                         numbers.push(Number(seed % base));
@@ -350,7 +388,7 @@
                     }
 
                     results = numbers.reverse();
-                    console.log("results:", results);
+                    add_result_description(`<b>Draw Numbers (base ${base})</b>: <spam class="hash">${results}</spam>.`);
                     return results;
                 } catch (error) {
                     console.error(hash, error);
