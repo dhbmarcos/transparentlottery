@@ -4,7 +4,7 @@
     {
         static get observedAttributes()
         {
-            return ["title", "href", "description", "headerless", "footerless" ];
+            return ["title", "href", "description", "bitcoin-address", "headerless", "footerless" ];
         }
 
         constructor()
@@ -34,6 +34,10 @@
 
             if (attribute === "description") {
                 window.page.description = newValue;
+            }
+
+            if (attribute === "bitcoin-address") {
+                window.page.bitcoin_address = newValue;
             }
 
             this.render();
@@ -83,6 +87,8 @@
 
         render()
         {
+            const bitcoin_address = window.page.bitcoin_address || "";
+
             let header = "<page-header></page-header>";
             if (this.headerless) {
                 header = "";
@@ -143,6 +149,9 @@
                 <div id="loading">
                     <div class="spinner"></div>
                 </div>
+
+                <page-donation bitcoin-address="${bitcoin_address}"></page-donation>
+
                 ${header}
                 <slot></slot>
                 ${footer}

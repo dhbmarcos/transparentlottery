@@ -4,7 +4,7 @@
     {
         static get observedAttributes()
         {
-            return ["address"];
+            return ["bitcoin-address"];
         }
 
         constructor()
@@ -27,19 +27,20 @@
             this.render();
         }
 
-        get address()
+        get bitcoin_address()
         {
-            return this.getAttribute("address");
+            return this.getAttribute("bitcoin-address");
         }
 
-        set address(value)
+        set bitcoin_address(value)
         {
-            this.setAttribute("address", value);
+            this.setAttribute("bitcoin-address", value);
         }
 
         render()
         {
             const title   = window.page.title || "We";
+            const address = this.bitcoin_address;
 
             let message = `${title} donation`;
             if (!window.page.title) {
@@ -47,7 +48,7 @@
             }
 
             const button      = "Copy transaction and paste in your wallet.";
-            const transaction = `bitcoin:${this.address}?label=${encodeURIComponent(message)}&message=${encodeURIComponent(message)}`;
+            const transaction = `bitcoin:${address}?label=${encodeURIComponent(message)}&message=${encodeURIComponent(message)}`;
             const qrcode      = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(transaction)}`;
 
             this._shadowRoot.innerHTML = `
@@ -65,7 +66,7 @@
                             <hr>
                             <p>
                                 Send us any value to the address:<br>
-                                <b>${this.address}</b>
+                                <b>${address}</b>
                             </p>
                             <hr>
                             <p>You can use this QR code in your wallet to send us any value:</p>
