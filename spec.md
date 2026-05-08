@@ -1,6 +1,6 @@
 ---
 layout: simple
-title: Transparent Lottery
+title: Specification
 ---
 
 # Transparent Lottery
