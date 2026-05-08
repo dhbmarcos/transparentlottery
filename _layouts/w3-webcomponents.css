@@ -1,0 +1,37 @@
+:host {
+    display: block;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.w3-bar > *,
+.w3-bar slot::slotted(*) {
+    float: left;
+}
+
+:host([hidden]) {
+    display: none !important;
+}
+
+:host(.w3-row)::after,
+:host(.w3-row-padding)::after,
+:host(.w3-bar)::after,
+:host(.w3-clear)::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+:host([class*="w3-col"]),
+:host(.w3-half),
+:host(.w3-third),
+:host(.w3-twothird),
+:host(.w3-quarter),
+:host(.w3-threequarter) {
+    float: left;
+}

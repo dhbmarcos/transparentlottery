@@ -1,0 +1,116 @@
+(function ()
+{
+    class PageFooter extends HTMLElement
+    {
+        constructor()
+        {
+            super();
+            this._shadowRoot = this.attachShadow({mode: "closed"});
+        }
+
+        connectedCallback()
+        {
+            const title       = window.page["title"]       || "";
+            const href        = window.page["href"]        || "#";
+            const description = window.page["description"] || "";
+            const date        = new Date().getFullYear();
+
+            this._shadowRoot.innerHTML = `
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+                <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
+                <link rel="stylesheet" href="w3-webcomponents.css">
+
+                <footer class="w3-container w3-center w3-black">
+                    <svg width="1595px" height="185px" viewBox="0 0 1595 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+                        <title>ver 3 Footer bg</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.400000006">
+                            <g id="19/01/18-Bitcoin.org-ver3-Desktop-1200px--" transform="translate(0.000000, -3077.000000)">
+                                <g id="//Footer" transform="translate(0.000000, 3078.000000)">
+                                    <g id="ver-3-Footer-bg">
+                                        <g id="Group-15">
+                                            <g>
+                                                <g id="Group-14" opacity="0.5" stroke="#616161">
+                                                    <polyline id="Path-17" points="0 19 52 48 183 0 262 93 395 13 480 118"></polyline>
+                                                    <path d="M263,95 L56,48" id="Path-19"></path>
+                                                    <path d="M395,13 L182,0" id="Path-20"></path>
+                                                    <polyline id="Path-21" points="835 171 1174 120 1389 44 1473 160"></polyline>
+                                                    <polyline id="Path-22" points="1583 16 1387 44 1200 0 1173 119 1147 0 835 171"></polyline>
+                                                    <polyline id="Path-23" points="761 0 665 50 835 171"></polyline>
+                                                    <path d="M665,50 L393,14" id="Path-24"></path>
+                                                </g>
+                                                <g id="dots" transform="translate(381.000000, 1.000000)">
+                                                    <circle id="Oval-2" fill="#ff5722" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(245.000000, 27.000000)">
+                                                    <circle id="Oval-2" fill="#ff5722" cx="17.5" cy="67.5" r="5.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="17.5" cy="67.5" r="17.5"></circle>
+                                                    <circle id="Oval-2" fill="#ff5722" cx="1141.5" cy="17.5" r="5.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="1141.5" cy="17.5" r="17.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(1161.000000, 108.000000)">
+                                                    <circle id="Oval-2" fill="#616161" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#616161" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" opacity="0.699999988" transform="translate(1461.000000, 148.000000)">
+                                                    <circle id="Oval-2" fill="#616161" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#616161" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(42.000000, 36.000000)">
+                                                    <circle id="Oval-2" fill="#616161" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#616161" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(652.000000, 36.000000)">
+                                                    <circle id="Oval-2" fill="#616161" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#616161" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(469.000000, 107.000000)">
+                                                    <circle id="Oval-2" fill="#ff5722" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(1569.000000, 2.000000)">
+                                                    <circle id="Oval-2" fill="#ff5722" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                                <g id="dots" transform="translate(823.000000, 158.000000)">
+                                                    <circle id="Oval-2" fill="#ff5722" cx="12.5" cy="12.5" r="3.5"></circle>
+                                                    <circle id="Oval-2" stroke="#ff5722" cx="12.5" cy="12.5" r="12.5"></circle>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <div class="w3-container w3-center w3-padding-64"></div>
+                    <div class="w3-container">
+                        <div class="w3-bar">
+                            <a class="w3-bar-item w3-button w3-text-theme w3-large" href="${href}">
+                                <b>${title}</b>
+                            </a>
+                            <span class="w3-bar-item">${description}</span>
+                        </div>
+                        <page-menu></page-menu>
+                    </div>
+                    <div class="w3-container">
+                        <div class="w3-bar">
+                            <a class="w3-bar-item w3-button" onclick="document.getElementById('donation').style.display='block'">Help us</a>
+                        </div>
+                    </div>
+                    <p class="w3-tiny">
+                        Copyright (c) ${date} D. H. B. Marcos.
+                        <br>
+                        Deo omnis gloria.
+                    </p>
+                    </div>
+                </footer>
+                <div class="w3-container w3-center w3-padding-64"></div>
+                `;
+        }
+    }
+    customElements.define("page-footer", PageFooter);
+})();
