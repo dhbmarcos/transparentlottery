@@ -58,7 +58,7 @@
             let content = `
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
-                <link rel="stylesheet" href="w3-webcomponents.css">
+                <link rel="stylesheet" href="/pages/w3-webcomponents.css">
                 `;
             if (this.emphasis) {
                 content += `<a class="w3-bar-item w3-button w3-theme w3-round" href="${href}">`;
