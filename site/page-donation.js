@@ -54,7 +54,7 @@
             this._shadowRoot.innerHTML = `
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
-                <link rel="stylesheet" href="/components/w3-webcomponents.css">
+                <link rel="stylesheet" href="/site/w3-webcomponents.css">
 
                 <a id="donation-open" class="w3-button w3-block w3-theme w3-hover-theme">${title} need your support!</a>
                 <div id="donation-modal" class="w3-modal">
