@@ -8,7 +8,7 @@
             this.attachShadow({mode: "closed"}).innerHTML = `
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
-                <link rel="stylesheet" href="/pages/w3-webcomponents.css">
+                <link rel="stylesheet" href="/components/w3-webcomponents.css">
 
                 <div class="w3-padding-16 w3-center w3-white"></div>
                 <div class="w3-padding-16 w3-center w3-white">

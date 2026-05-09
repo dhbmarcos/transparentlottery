@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-us">
 	<head>
-		<title>Transparent Lottery</title>
+		<title>{{ site.title }} | {{ page.title }}</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
-        <link rel="stylesheet" href="/pages/w3-webcomponents.css">
-        <script src="/pages/page-donation.js"></script>
-        <script src="/pages/page-menu-item.js"></script>
-        <script src="/pages/page-menu.js"></script>
-        <script src="/pages/page-root.js"></script>
-        <script src="/pages/page-header.js"></script>
-        <script src="/pages/page-session.js"></script>
-        <script src="/pages/page-divider.js"></script>
-        <script src="/pages/page-footer.js"></script>
+        <link rel="stylesheet" href="/components/w3-webcomponents.css">
+        <script src="/components/page-donation.js"></script>
+        <script src="/components/page-menu-item.js"></script>
+        <script src="/components/page-menu.js"></script>
+        <script src="/components/page-root.js"></script>
+        <script src="/components/page-header.js"></script>
+        <script src="/components/page-session.js"></script>
+        <script src="/components/page-divider.js"></script>
+        <script src="/components/page-footer.js"></script>
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QGWBDVQ8B"></script>
@@ -27,14 +27,14 @@
 
 </head>
     <body>
-        <page-root title="Transparent Lottery" description="Public, verifiable lottery powered by Bitcoin hash" bitcoin-address="bc1qcjuxfykv08w5strmwxlerd8hq6c2v50aslxke8" headerless>
+        <page-root title="{{ site.title }}" description="{{ site.description }}" bitcoin-address="{{ site.bitcoin_address }}" headerless>
 
             <page-session id="hero" full>
                 <page-header></page-header>
                 <div class="w3-padding-64"></div>
-                <p class="w3-xxxlarge">Public, verifiable lottery<br>powered by Bitcoin hash.</p>
+                <p class="w3-xxxlarge">{{  site.description  }}.</p>
                 <p class="w3-padding-32 w3-center w3-xlarge">
-                    <a class="w3-bar-item w3-button w3-theme w3-round" href="https://transparentlottery.com/example">Example</a>
+                    <a class="w3-bar-item w3-button w3-theme w3-round" href="/example">Example</a>
                     <a class="w3-bar-item w3-button w3-white w3-border w3-border-theme w3-round w3-text-theme" href="#how-it-works">How it works</a>
                 </p>
                 <page-divider></page-divider>
@@ -53,7 +53,7 @@
                     This means that the outcome of any lottery draw is determined by a public, verifiable, and immutable source – the Bitcoin blockchain.
                 </p>
                 <p>
-                    For more information, see the <a class="w3-button w3-theme w3-round" href="https://transparentlottery.com/spec">specification</a>
+                    For more information, see the <a class="w3-button w3-theme w3-round" href="/spec">specification</a>
                 </p>
             </page-session>
 

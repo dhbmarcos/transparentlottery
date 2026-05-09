@@ -17,7 +17,7 @@
             this._shadowRoot.innerHTML = `
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
-                <link rel="stylesheet" href="/pages/w3-webcomponents.css">
+                <link rel="stylesheet" href="/components/w3-webcomponents.css">
 
                 <header class="w3-padding-32 w3-center w3-white">
                     <div class="w3-container">
