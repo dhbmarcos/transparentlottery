@@ -1,10 +1,40 @@
 class TransparentLottery
 {
-    constructor(base, height, terminal=null, roll=0)
+    constructor(base, height, roll=0, terminal=undefined)
     {
-        this._base     = base;
-        this._height   = height;
-        this._roll     = roll;
+        /* Base */
+        if (!Number.isInteger(base)) {
+            throw `Base paramenter must be an integer, not ${typeof base}.`;
+        }
+        if (base < 2 || base > 256) {
+            throw `Base paramenter must be between 2 and 256, not ${base}.`;
+        }
+        this._base = base;
+
+        /* Height */
+        if (!Number.isInteger(height)) {
+            throw `Height paramenter must be an integer, not ${typeof height}.`;
+        }
+        if (height < 0) {
+            throw `Height paramenter must be greater than or equal to 0, not ${height}.`;
+        }
+        this._height = height;
+
+        /* Roll */
+        if (!Number.isInteger(roll)) {
+            throw `Roll paramenter must be an integer, not ${typeof roll}.`;
+        }
+        if (roll < 0) {
+            throw `Roll paramenter must be greater than or equal to 0, not ${roll}.`;
+        }
+        this._roll = roll;
+
+        /* Terminal */
+        if (terminal !== undefined) {
+            if (!(terminal instanceof HTMLElement)) {
+                throw `Termimal paramenter must be an HTML element or a null value, not ${typeof terminal}.`;
+            }
+        }
         this._terminal = terminal;
     }
 
@@ -39,8 +69,8 @@ class TransparentLottery
 
             const data      = await response.json();
             const timestamp = data.timestamp;
-            this.instant    = new Date(timestamp * 1000).toLocaleString();
-            this.logTerminal(`It was mined at ${this.instant}.`)
+            this._instant   = new Date(timestamp * 1000).toLocaleString();
+            this.logTerminal(`It was mined at ${this._instant}.`)
 
         } catch (error) {
             return this.logTerminal(`<samp>${error}</samp>`);
@@ -52,13 +82,15 @@ class TransparentLottery
 
     logTerminal(message)
     {
-        console.log(message.replace(/<[^>]*>?/gm, ""));
-
         if (this._terminal) {
             let paragraph = document.createElement("p");
             paragraph.innerHTML = message;
             this._terminal.appendChild(paragraph);
         }
+
+        message = message.replace(/<[^>]*>?/gm, "");
+        console.log(message);
+        return message;
     }
 
     async _blockEstimate()
