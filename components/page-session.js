@@ -66,7 +66,7 @@
                     }
                 </style>
 
-                <div class="v-full w3-container w3-padding-64 w3-${color} w3-center">
+                <div class="v-full w3-container w3-padding-64 w3-${color}">
                     <div class="w3-content">
                         <slot></slot>
                     </div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<title>{{ site.title }} | {{ page.title }}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
+        <link rel="stylesheet" href="/components/w3-webcomponents.css">
+        <link rel="stylesheet" href="/components/code-theme.css">
+        <script src="/components/page-donation.js"></script>
+        <script src="/components/page-menu-item.js"></script>
+        <script src="/components/page-menu.js"></script>
+        <script src="/components/page-root.js"></script>
+        <script src="/components/page-header.js"></script>
+        <script src="/components/page-session.js"></script>
+        <script src="/components/page-divider.js"></script>
+        <script src="/components/page-footer.js"></script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QGWBDVQ8B"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-9QGWBDVQ8B');
+        </script>
+
+</head>
+    <body>
+        <page-root href="/" title="{{ site.title }}" description="{{ site.description }}" bitcoin-address="{{ site.bitcoin_address }}">
+            <page-session>
+                {{ content }}
+            </page-session>
+        </page-root>
+    </body>
+</html>
