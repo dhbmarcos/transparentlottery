@@ -64,13 +64,13 @@ class TransparentLottery
                 return this.logTerminal(`<samp>${error}</samp>`);
             }
 
-            this._hash = await response.text();
-            this.logTerminal(`The <b>hash</b> of <b>block</b> <code>${this._height}</code> is <code>${this._hash}</code>.`)
+            this._seed = await response.text();
+            this.logTerminal(`The <b>hash</b> of <b>block</b> <code>${this._height}</code> is <code>${this._seed}</code>.`)
 
-            const mempoolBlockData = `https://mempool.space/api/block/${this._hash}`;
+            const mempoolBlockData = `https://mempool.space/api/block/${this._seed}`;
             response = await fetch(mempoolBlockData);
             if (!response.ok) {
-                throw `Failed to get the data of block ${this._hash} from ${mempoolBlockData}: Error ${response.status}${response.statusText}`;
+                throw `Failed to get the data of block ${this._seed} from ${mempoolBlockData}: Error ${response.status}${response.statusText}`;
             }
 
             const data      = await response.json();
@@ -82,8 +82,8 @@ class TransparentLottery
             return this.logTerminal(`<samp>${error}</samp>`);
         }
 
-        this.logTerminal(`Check it out at <a href="https://mempool.space/block/${this._hash}">https://mempool.space/block/${this._hash}</a>.`);
-        this.logTerminal(`The <b>Seed Draw Number</b> is <code>${this._hash}</code>.`)
+        this.logTerminal(`Check it out at <a href="https://mempool.space/block/${this._seed}">https://mempool.space/block/${this._seed}</a>.`);
+        this.logTerminal(`<b>Seed Draw Number</b>: <code>${this._seed}</code>.`)
     }
 
     logTerminal(message)
@@ -128,7 +128,7 @@ class TransparentLottery
         this.logTerminal(`Please, wait mining and return back later.`);
         this.logTerminal(`Draw estimation:<b>${date.toISOString()}</b>, considering an average of <code>${(interval / 60).toFixed(2)} minute/block</code>.`);
 
-        this._hash    = null;
+        this._seed    = null;
         this._instant = date.toISOString();
     }
 }
