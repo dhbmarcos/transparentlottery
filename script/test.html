@@ -148,6 +148,16 @@
         throw new result("Get block Terminal failed!");
     }
 
+    let testerGetBlockEstimation = new TransparentLottery(2, 1000000, 0, terminalGetBlock);
+    await testerGetBlockEstimation._getBlock();
+
+    if (testerGetBlockEstimation._hash != null) {
+        throw new result("Get block Estimation Hash failed!");
+    }
+    if (new Date().getTime() > Date.parse(testerGetBlockEstimation._instant)) {
+        throw new result("Get block Estimation Instant failed!");
+    }
+
     result("Get Block OK");
 
 </script>

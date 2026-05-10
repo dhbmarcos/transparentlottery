@@ -51,13 +51,19 @@ class TransparentLottery
             const mempoolBlockHash = `https://mempool.space/api/block-height/${this._height}`;
             this.logTerminal(`Getting <b>block</b> <code>${this._height}</code> from <b>Bitcoin Mempool</b>...`);
 
-            response = await fetch(mempoolBlockHash);
-            if (!response.ok) {
-                if (response.status == 404) {
-                    return this._blockEstimate();
+            try {
+                response = await fetch(mempoolBlockHash);
+                if (!response.ok) {
+                    if (response.status == 404) {
+                        return this._getBlockEstimate();
+                    }
+                    throw `Failed to get the hash of block ${this._height} from ${mempoolBlockHash}: Error ${response.status}: ${await response.text()}`;
                 }
-                throw `Failed to get the hash of block ${this._height} from ${mempoolBlockHash}: Error ${response.status}: ${await response.text()}`;
+            } catch (error) {
+                console.log(error);
+                return this.logTerminal(`<samp>${error}</samp>`);
             }
+
             this._hash = await response.text();
             this.logTerminal(`The <b>hash</b> of <b>block</b> <code>${this._height}</code> is <code>${this._hash}</code>.`)
 
@@ -93,8 +99,36 @@ class TransparentLottery
         return message;
     }
 
-    async _blockEstimate()
+    async _getBlockEstimate()
     {
-        // TODO
+        let response        = await fetch("https://mempool.space/api/blocks/tip/height");
+        const currentHeight = await response.json();
+
+        response               = await fetch("https://mempool.space/api/blocks");
+        const blocks           = await response.json();
+        const currentTimestamp = blocks[0].timestamp;
+        const deltaBlocks      = this._height - currentHeight;
+
+        if (deltaBlocks < 0) {
+            throw `Block ${this._height} already mined.`;
+        }
+
+        let interval = 10 * 60;
+        if (blocks.length > 1) {
+            const lastTime  = blocks[0].timestamp;
+            const firstTime = blocks[blocks.length - 1].timestamp;
+            interval        = (lastTime - firstTime) / blocks.length;
+        }
+
+        const seconds = deltaBlocks * interval;
+        const date    = new Date((currentTimestamp + seconds) * 1000);
+
+        this.logTerminal(`The block <code>${this._height}</code> is not mined yet.`);
+        this.logTerminal(`Current block is <code>${currentHeight}</code>.`);
+        this.logTerminal(`Please, wait mining and return back later.`);
+        this.logTerminal(`Draw estimation:<b>${date.toISOString()}</b>, considering an average of <code>${(interval / 60).toFixed(2)} minute/block</code>.`);
+
+        this._hash    = null;
+        this._instant = date.toISOString();
     }
 }
