@@ -140,11 +140,11 @@
     if (testerGetBlock._hash != "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f") {
         throw new result("Get block Hash failed!");
     }
-    if (testerGetBlock._instant != "03/01/2009, 16:15:05") {
+    if (testerGetBlock._instant != "2009-01-03T18:15:05.000Z") {
         throw new result("Get block Instant failed!");
     }
 
-    if (testerGetBlock._terminal.innerHTML != '<p>Getting <b>block</b> <code>0</code> from <b>Bitcoin Mempool</b>...</p><p>The <b>hash</b> of <b>block</b> <code>0</code> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>It was mined at 03/01/2009, 16:15:05.</p><p>Check it out at <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</a>.</p><p>The <b>Seed Draw Number</b> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p>') {
+    if (testerGetBlock._terminal.innerHTML != '<p>Getting <b>block</b> <code>0</code> from <b>Bitcoin Mempool</b>...</p><p>The <b>hash</b> of <b>block</b> <code>0</code> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>It was mined at 2009-01-03T18:15:05.000Z.</p><p>Check it out at <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</a>.</p><p>The <b>Seed Draw Number</b> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p>') {
         throw new result("Get block Terminal failed!");
     }
 

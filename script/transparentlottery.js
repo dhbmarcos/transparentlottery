@@ -69,7 +69,7 @@ class TransparentLottery
 
             const data      = await response.json();
             const timestamp = data.timestamp;
-            this._instant   = new Date(timestamp * 1000).toLocaleString();
+            this._instant   = new Date(timestamp * 1000).toISOString();
             this.logTerminal(`It was mined at ${this._instant}.`)
 
         } catch (error) {
