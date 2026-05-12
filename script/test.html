@@ -39,14 +39,6 @@
             }
         };
     try {
-        new TransparentLottery(3);
-        throw new Assert(result("Base failed!"));
-    } catch (error) {
-        if (error instanceof Assert) {
-            throw error;
-        }
-    };
-    try {
         new TransparentLottery(1);
         throw new Assert(result("Base failed!"));
     } catch (error) {
@@ -67,14 +59,6 @@
 
     /* Height */
     try {
-        new TransparentLottery(2);
-        throw new Assert(result("Height failed!"));
-    } catch (error) {
-        if (error instanceof Assert) {
-            throw error;
-        };
-    }
-    try {
         new TransparentLottery(2, -1);
         throw new Assert(result("Height failed!"));
     } catch (error) {
@@ -85,21 +69,9 @@
 
     result("Height OK");
 
-    /* Roll */
-    try {
-        new TransparentLottery(2, 0, -1);
-        throw new Assert(result("Roll failed!"));
-    } catch (error) {
-        if (error instanceof Assert) {
-            throw error;
-        }
-    };
-
-    result("Roll OK");
-
     /* Terminal */
     try {
-        new TransparentLottery(2, 0, 0, 0);
+        new TransparentLottery(2, 0, 0);
         throw new Assert(result("Terminal failed!"));
     } catch (error) {
         if (error instanceof Assert) {
@@ -110,12 +82,11 @@
     result("Terminal OK");
 
     /* Initializations */
-    new TransparentLottery(2, 0);
-    new TransparentLottery(256, 0);
-    new TransparentLottery(2, 0, 0);
+    new TransparentLottery(2);
+    new TransparentLottery(256);
 
     let terminalInitialization = document.createElement("div");
-    let testerInitialization = new TransparentLottery(2, 0, 0, terminalInitialization);
+    let testerInitialization = new TransparentLottery(2, 0, terminalInitialization);
 
     if (testerInitialization._base != 2) {
         throw new result("Base failed!");
@@ -123,41 +94,65 @@
     if (testerInitialization._height != 0) {
         throw new result("Height failed!");
     }
-    if (testerInitialization._roll != 0) {
-        throw new result("Roll failed!");
-    }
     if (testerInitialization._terminal != terminalInitialization) {
         throw new result("Terminal failed!");
     }
 
     result("Initialization OK");
 
-    /* Get Block */
-    let terminalGetBlock = document.createElement("div");
-    let testerGetBlock = new TransparentLottery(2, 0, 0, terminalGetBlock);
-    await testerGetBlock._getBlock();
+    /* Get Current Height */
+    let terminalGetCurrentHeight = document.createElement("div");
 
-    if (testerGetBlock._seed != "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f") {
-        throw new result("Get block Hash failed!");
+    let testerGetCurrentHeight = new TransparentLottery(2, undefined, terminalGetCurrentHeight);
+    await testerGetCurrentHeight._getCurrentHeight();
+    if (!testerGetCurrentHeight._height) {
+        throw new result("Get Current Height failed!");
     }
-    if (testerGetBlock._instant != "2009-01-03T18:15:05.000Z") {
-        throw new result("Get block Instant failed!");
-    }
+    result("Get Current Height OK");
 
-    if (testerGetBlock._terminal.innerHTML != '<p>Getting <b>block</b> <code>0</code> from <b>Bitcoin Mempool</b>...</p><p>The <b>hash</b> of <b>block</b> <code>0</code> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>It was mined at 2009-01-03T18:15:05.000Z.</p><p>Check it out at <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</a>.</p><p><b>Seed Draw Number</b>: <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p>') {
-        throw new result("Get block Terminal failed!");
-    }
-
-    let testerGetBlockEstimation = new TransparentLottery(2, 1000000, 0, terminalGetBlock);
-    await testerGetBlockEstimation._getBlock();
+    /* Get Block Estimation */
+    let terminaGetBlockEstimation = document.createElement("div");
+    let testerGetBlockEstimation  = new TransparentLottery(2, 1000000, terminaGetBlockEstimation);
+    await testerGetBlockEstimation._getBlockEstimate();
 
     if (testerGetBlockEstimation._seed != null) {
-        throw new result("Get block Estimation Hash failed!");
+        throw new result("Get Block Estimation Hash failed!");
     }
     if (new Date().getTime() > Date.parse(testerGetBlockEstimation._instant)) {
-        throw new result("Get block Estimation Instant failed!");
+        throw new result("Get Block Estimation Instant failed!");
     }
 
-    result("Get Block OK");
+    /* Get Seed */
+    let terminalGetSeed = document.createElement("div");
+
+    let testerGetSeed0 = new TransparentLottery(2, 0, terminalGetSeed);
+    await testerGetSeed0._getSeed();
+    if (testerGetSeed0._seed != "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f") {
+        throw new result("Get Seed Hash failed!");
+    }
+    if (testerGetSeed0._instant != "2009-01-03T18:15:05.000Z") {
+        throw new result("Get Seed Instant failed!");
+    }
+    if (testerGetSeed0._terminal.innerHTML != '<p>Get the hash of block <code>0</code> from <b>Bitcoin Mempool</b> (<a href="https://mempool.space/api/block-height/0">https://mempool.space/api/block-height/0</a>)...</p><p>The <b>hash</b> of <b>block</b> <code>0</code> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>It was mined at 2009-01-03T18:15:05.000Z.</p><p>Check it out at <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</a>.</p><p><b>Seed Draw Number</b>: <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p>') {
+        throw new result("Get Seed Terminal failed!");
+    }
+
+    let testerGetSeed1 = new TransparentLottery(2, 1000000, terminalGetSeed);
+    await testerGetSeed1._getSeed();
+    if (testerGetSeed1._seed != null) {
+        throw new result("Get Seed Hash failed!");
+    }
+    if (new Date().getTime() > Date.parse(testerGetSeed1._instant)) {
+        throw new result("Get Seed Instant failed!");
+    }
+    result("Get Seed OK");
+
+    /* */
+
+    console.log("---")
+
+    let tl = new TransparentLottery(2);
+    tl.draw();
+
 
 </script>
