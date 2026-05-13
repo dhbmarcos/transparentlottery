@@ -16,6 +16,15 @@
     function result(result, message)
     {
         let item = document.createElement("tr");
+
+        if (result == "FAILED") {
+            result = "<b style='color:red;'>FAILED!</b>";
+        }
+
+        if (result == "OK") {
+            result = "<b style='color:green;'>OK</b>";
+        }
+
         item.innerHTML = `<td>${result}</td><td>${message}</td>`;
         document.getElementById("results").appendChild(item);
         return message;
@@ -86,7 +95,7 @@
     new TransparentLottery(256);
 
     let terminalInitialization = document.createElement("div");
-    let testerInitialization = new TransparentLottery(2, 0, terminalInitialization);
+    let testerInitialization   = new TransparentLottery(2, 0, terminalInitialization);
 
     if (testerInitialization._base != 2) {
         throw new result("FAILED", "Base failed!");
@@ -102,8 +111,7 @@
 
     /* Get Current Height */
     let terminalGetCurrentHeight = document.createElement("div");
-
-    let testerGetCurrentHeight = new TransparentLottery(2, undefined, terminalGetCurrentHeight);
+    let testerGetCurrentHeight   = new TransparentLottery(2, undefined, terminalGetCurrentHeight);
     await testerGetCurrentHeight._getCurrentHeight();
     if (!testerGetCurrentHeight._height) {
         throw new result("FAILED", "Get Current Height failed!");
@@ -124,8 +132,7 @@
 
     /* Get Seed */
     let terminalGetSeed = document.createElement("div");
-
-    let testerGetSeed0 = new TransparentLottery(2, 0, terminalGetSeed);
+    let testerGetSeed0  = new TransparentLottery(2, 0, terminalGetSeed);
     await testerGetSeed0._getSeed();
     if (testerGetSeed0._seed != "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f") {
         throw new result("FAILED", "Get Seed Hash failed!");
@@ -149,7 +156,7 @@
 
     /* Roll Hash */
     let terminalRollHash = document.createElement("div");
-    let testerRollHash = new TransparentLottery(2, 0, terminalRollHash);
+    let testerRollHash   = new TransparentLottery(2, 0, terminalRollHash);
     await testerRollHash._getSeed();
     if (await testerRollHash._rollHash(testerRollHash._seed) != "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f") {
         throw new result("FAILED", "Roll 0 Hash failed!");
@@ -158,6 +165,49 @@
         throw new result("FAILED", "Roll 1 Hash failed!");
     }
     result("OK", "Roll Hash");
+
+    console.log("---")
+
+    /* Get Draw Numbers */
+    let terminalGetDrawNumbers = document.createElement("div");
+    let testerGetDrawNumbers   = new TransparentLottery(2, 0, terminalGetDrawNumbers);
+    await testerGetDrawNumbers._getSeed();
+    const drawNumbers          = await testerGetDrawNumbers._getDrawNumbers(testerGetDrawNumbers._seed, 256);
+    const drawNumbersReference = [25,214,104,156,8,90,225,101,131,30,147,79,247,99,174,70,162,166,193,114,179,241,182,10,140,226,111];
+
+    for (let drawNumber = 0; drawNumber < drawNumbers.length; drawNumber++) {
+        if (drawNumbers[drawNumber] != drawNumbersReference[drawNumber]) {
+            throw new result("FAILED", "Get Draw Numbers failed!");
+        }
+    }
+    if (testerGetDrawNumbers._terminal.innerHTML != '<p>Get the hash of block <code>0</code> from <b>Bitcoin Mempool</b> (<a href="https://mempool.space/api/block-height/0">https://mempool.space/api/block-height/0</a>)...</p><p>The <b>hash</b> of <b>block</b> <code>0</code> is <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>It was mined at 2009-01-03T18:15:05.000Z.</p><p>Check it out at <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</a>.</p><p><b>Seed Draw Number</b>: <code>000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code>.</p><p>Add zeros to the left of the Draw Rool Number to ensure it has 64 characters: <code">000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f</code"></p><p>Convert the Draw Number to base <code>10</code> for further calculations using JavaScript:</p><p><code>const draw_number_10 = BigInt("0x" + "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f")</code></p><p><code>// draw_number_10 = "10628944869218562084050143519444549580389464591454674019345556079"</code></p><p><code>const base_10 = BigInt("0x" + 256)</code></p><p><code>// base = "10628944869218562084050143519444549580389464591454674019345556079"</code></p><p>Convert the Draw Number to Game Base dividing it by <code>256</code> to get Draw Numbers. Each Draw Number is the rest the each division.</p><p><code>10628944869218562084050143519444549580389464591454674019345556079 / 256 = 41519315895385008140820873122830271798396346060369820388068578<code> and rest <code>111</code>. <code">111</code"></code> is a Draw Number.</code></p><p><code>41519315895385008140820873122830271798396346060369820388068578 / 256 = 162184827716347688050081535636055749212485726798319610890892<code> and rest <code>226</code>. <code">226</code"></code> is a Draw Number.</code></p><p><code>162184827716347688050081535636055749212485726798319610890892 / 256 = 633534483266983156445630998578342770361272370305935980042<code> and rest <code>140</code>. <code">140</code"></code> is a Draw Number.</code></p><p><code>633534483266983156445630998578342770361272370305935980042 / 256 = 2474744075261652954865746088196651446723720196507562422<code> and rest <code>10</code>. <code">10</code"></code> is a Draw Number.</code></p><p><code>2474744075261652954865746088196651446723720196507562422 / 256 = 9666969043990831854944320657018169713764532017607665<code> and rest <code>182</code>. <code">182</code"></code> is a Draw Number.</code></p><p><code>9666969043990831854944320657018169713764532017607665 / 256 = 37761597828089186933376252566477225444392703193779<code> and rest <code>241</code>. <code">241</code"></code> is a Draw Number.</code></p><p><code>37761597828089186933376252566477225444392703193779 / 256 = 147506241515973386458500986587801661892158996850<code> and rest <code>179</code>. <code">179</code"></code> is a Draw Number.</code></p><p><code>147506241515973386458500986587801661892158996850 / 256 = 576196255921771040853519478858600241766246081<code> and rest <code>114</code>. <code">114</code"></code> is a Draw Number.</code></p><p><code>576196255921771040853519478858600241766246081 / 256 = 2250766624694418128334060464291407194399398<code> and rest <code>193</code>. <code">193</code"></code> is a Draw Number.</code></p><p><code>2250766624694418128334060464291407194399398 / 256 = 8792057127712570813804923688638309353122<code> and rest <code>166</code>. <code">166</code"></code> is a Draw Number.</code></p><p><code>8792057127712570813804923688638309353122 / 256 = 34343973155127229741425483158743395910<code> and rest <code>162</code>. <code">162</code"></code> is a Draw Number.</code></p><p><code>34343973155127229741425483158743395910 / 256 = 134156145137215741177443293588841390<code> and rest <code>70</code>. <code">70</code"></code> is a Draw Number.</code></p><p><code>134156145137215741177443293588841390 / 256 = 524047441942248988974387865581411<code> and rest <code>174</code>. <code">174</code"></code> is a Draw Number.</code></p><p><code>524047441942248988974387865581411 / 256 = 2047060320086910113181202599927<code> and rest <code>99</code>. <code">99</code"></code> is a Draw Number.</code></p><p><code>2047060320086910113181202599927 / 256 = 7996329375339492629614072655<code> and rest <code>247</code>. <code">247</code"></code> is a Draw Number.</code></p><p><code>7996329375339492629614072655 / 256 = 31235661622419893084429971<code> and rest <code>79</code>. <code">79</code"></code> is a Draw Number.</code></p><p><code>31235661622419893084429971 / 256 = 122014303212577707361054<code> and rest <code>147</code>. <code">147</code"></code> is a Draw Number.</code></p><p><code>122014303212577707361054 / 256 = 476618371924131669379<code> and rest <code>30</code>. <code">30</code"></code> is a Draw Number.</code></p><p><code>476618371924131669379 / 256 = 1861790515328639333<code> and rest <code>131</code>. <code">131</code"></code> is a Draw Number.</code></p><p><code>1861790515328639333 / 256 = 7272619200502497<code> and rest <code>101</code>. <code">101</code"></code> is a Draw Number.</code></p><p><code>7272619200502497 / 256 = 28408668751962<code> and rest <code>225</code>. <code">225</code"></code> is a Draw Number.</code></p><p><code>28408668751962 / 256 = 110971362312<code> and rest <code>90</code>. <code">90</code"></code> is a Draw Number.</code></p><p><code>110971362312 / 256 = 433481884<code> and rest <code>8</code>. <code">8</code"></code> is a Draw Number.</code></p><p><code>433481884 / 256 = 1693288<code> and rest <code>156</code>. <code">156</code"></code> is a Draw Number.</code></p><p><code>1693288 / 256 = 6614<code> and rest <code>104</code>. <code">104</code"></code> is a Draw Number.</code></p><p><code>6614 / 256 = 25<code> and rest <code>214</code>. <code">214</code"></code> is a Draw Number.</code></p><p><code>25 / 256 = 0<code> and rest <code>25</code>. <code">25</code"></code> is a Draw Number.</code></p><p>The last result of division is zero, then stop division.</p><p>Revert sequence of results to get Draw Numbers.</p><p>Draw Numbers: <code">25,214,104,156,8,90,225,101,131,30,147,79,247,99,174,70,162,166,193,114,179,241,182,10,140,226,111</code"></p>') {
+        throw new result("FAILED", "Get Draw Numbers Terminal failed!");
+    }
+    result("OK", "Get Draw Numbers");
+
+    /* logTerminal */
+    let terminalLogTerminal = document.createElement("div");
+    let testerLogTerminal   = new TransparentLottery(2, 0, terminalLogTerminal);
+    const terminalMessage = await testerLogTerminal.logTerminal("Test Message");
+    if (terminalLogTerminal.innerHTML != '<p>Test Message</p>') {
+        throw new result("FAILED", "Log Terminal failed!");
+    }
+    if (terminalLogTerminal.textContent != terminalMessage) {
+        throw new result("FAILED", "Log Terminal failed!");
+    }
+    result("OK", "Log Terminal");
+
+    /* Draw */
+    let terminalDraw = document.createElement("div");
+    let testerDraw   = new TransparentLottery(2, 0, terminalDraw);
+    const draw = await testerDraw.draw();
+    const drawReference = [1,1,1,0,0,1,1,0,0,1,1,0,1,0,0,0,0,1,0,0,0,1,1,1,0,1,1,0,0,1,1,1,1,0,0,0,0,1,0,0,1,1,1,0,0,1,0,0,1,0,0,1,0,1,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,0,0,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,0,0,0,0,1,0,0,0,1,1,0,1,1,0,1,0,0,1,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0];
+    for (let drawNumber = 0; drawNumber < drawNumbers.length; drawNumber++) {
+        if (drawNumbers[drawNumber] != drawNumbersReference[drawNumber]) {
+            throw new result("FAILED", "Get Draw Numbers failed!");
+        }
+    }
+    result("OK", "Get Draw Numbers");
 
     /* Done */
     let p = document.createElement("p")
