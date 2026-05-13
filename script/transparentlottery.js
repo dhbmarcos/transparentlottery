@@ -32,30 +32,6 @@ class TransparentLottery
 
     }
 
-    async draw(roll=0)
-    {
-        /* Roll */
-        if (!Number.isInteger(roll)) {
-            throw `Roll paramenter must be an integer, not ${typeof roll}.`;
-        }
-        if (roll < 0) {
-            throw `Roll paramenter must be greater than or equal to 0, not ${roll}.`;
-        }
-
-        if (!this._height) {
-            await this._getCurrentHeight();
-        }
-
-        if (!this._seed) {
-            await this._getSeed()
-            this.logTerminal(`<b>Draw Rool Number 0</b> is the <b>Seed Draw Number</b>: <code>${this._seed}</code>.`);
-        }
-        let hash = this._seed;
-        hash = await this._rollHash(hash, roll);
-        let numbers = await this._getDrawNumbers(hash, this._base);
-        return numbers;
-    }
-
     async _getCurrentHeight()
     {
         const response = await fetch("https://mempool.space/api/blocks/tip/height");
@@ -104,19 +80,6 @@ class TransparentLottery
 
         this.logTerminal(`Check it out at <a href="https://mempool.space/block/${this._seed}">https://mempool.space/block/${this._seed}</a>.`);
         this.logTerminal(`<b>Seed Draw Number</b>: <code>${this._seed}</code>.`)
-    }
-
-    logTerminal(message)
-    {
-        if (this._terminal) {
-            let paragraph = document.createElement("p");
-            paragraph.innerHTML = message;
-            this._terminal.appendChild(paragraph);
-        }
-
-        message = message.replace(/<[^>]*>?/gm, "");
-        console.log(message);
-        return message;
     }
 
     async _getBlockEstimate()
@@ -206,5 +169,42 @@ class TransparentLottery
             console.error(hash, error);
             return `${hash} ${error}`;
         }
+    }
+
+    logTerminal(message)
+    {
+        if (this._terminal) {
+            let paragraph = document.createElement("p");
+            paragraph.innerHTML = message;
+            this._terminal.appendChild(paragraph);
+        }
+
+        message = message.replace(/<[^>]*>?/gm, "");
+        console.log(message);
+        return message;
+    }
+
+    async draw(roll=0)
+    {
+        /* Roll */
+        if (!Number.isInteger(roll)) {
+            throw `Roll paramenter must be an integer, not ${typeof roll}.`;
+        }
+        if (roll < 0) {
+            throw `Roll paramenter must be greater than or equal to 0, not ${roll}.`;
+        }
+
+        if (!this._height) {
+            await this._getCurrentHeight();
+        }
+
+        if (!this._seed) {
+            await this._getSeed()
+            this.logTerminal(`<b>Draw Rool Number 0</b> is the <b>Seed Draw Number</b>: <code>${this._seed}</code>.`);
+        }
+        let hash = this._seed;
+        hash = await this._rollHash(hash, roll);
+        let numbers = await this._getDrawNumbers(hash, this._base);
+        return numbers;
     }
 }
