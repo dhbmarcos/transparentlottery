@@ -100,7 +100,7 @@
 
         render()
         {
-            const name         = this.getAttribute("name");
+            let name           = this.getAttribute("name");
             const title        = this.getAttribute("title") || "";
             const description  = this.getAttribute("description") || "";
             const defaultValue = this.getAttribute("default");
@@ -110,6 +110,9 @@
                 throw `Invalid input name attribute: ${name}`;
             }
 
+            if (name) {
+                name = name.replace(/<\/?[^>]+(>|$)/g, "") || "";
+            }
 
             let content =`
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">

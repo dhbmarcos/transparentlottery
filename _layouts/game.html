@@ -53,11 +53,11 @@
                 const base        = setGameParameter(parameters.get("base"));
                 const height      = setGameParameter(parameters.get("height"));
                 const roll        = setGameParameter(parameters.get("roll"));
+                let name          = parameters.get("name");
 
-                let name     = parameters.get("name");
-                const parser = new DOMParser();
-                const parsed = parser.parseFromString(name, "text/html");
-                name         = parsed.body.textContent || "";
+                if (name) {
+                    name = name.replace(/<\/?[^>]+(>|$)/g, "") || "";
+                }
 
                 return {name, base, height, roll};
             }
@@ -106,11 +106,15 @@
 
             async function draw(name, base, height, roll)
             {
+                if (!name || name == null || name == "null") {
+                    name = "Transparent Lottery Game";
+                }
+
                 document.getElementById("name").innerHTML = name;
 
                 let terminal = document.getElementById("log");
                 let lottery  = new TransparentLottery(base, height, terminal);
-                let results = await lottery.draw(roll);
+                let results  = await lottery.draw(roll);
                 showResults(results);
             }
 
@@ -140,7 +144,7 @@
                     <h1>New Game</h1>
                     <h2>Game Settings</h2>
                     <p>Configure the parameters for the draw. The results are generated based on the Bitcoin blockchain to ensure complete transparency and fairness.</p>
-                    <page-form-text id="input-name" name="name" title="Game Name" description="Name of the game." default="My Own Game"></page-form-text>
+                    <page-form-text id="input-name" name="name" title="Game Name" description="Name of the game."></page-form-text>
                     <page-form-number id="input-base" name="base" min="2" max="256" default="6" title="Game Base" description="Number of options for each game play."></page-form-number>
                     <page-form-number id="input-height" name="height" min="0" default="0" title="Bitcoin Block Height" description="Height of Bitcoin block."></page-form-number>
                     <page-form-number id="input-roll" name="roll" min="0" default="0" title="Roll Number" description="Roll applied in the draw seed number."></page-form-number>
