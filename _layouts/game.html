@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/site/w3-webcomponents.css">
         <link rel="stylesheet" href="/site/code-theme.css">
         <script src="/script/transparentlottery.js"></script>
+        <script src="/site/page-spinner.js"></script>
         <script src="/site/page-donation.js"></script>
         <script src="/site/page-menu-item.js"></script>
         <script src="/site/page-menu.js"></script>
@@ -24,41 +25,153 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QGWBDVQ8B"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-9QGWBDVQ8B');
+            dataLayer.push('js', new Date());
+            dataLayer.push('config', 'G-9QGWBDVQ8B');
         </script>
+        <script>
 
+            function setGameParameter(parameter)
+            {
+                if (parameter == null) {
+                    return null;
+                }
+
+                parameter = Number(parameter);
+
+                if (isNaN(parameter)) {
+                    return null;
+                }
+
+                return parameter;
+            }
+
+            async function getParameterFromURL()
+            {
+                const queryString = window.location.search;
+                const parameters  = new URLSearchParams(queryString);
+                const base        = setGameParameter(parameters.get("base"));
+                const height      = setGameParameter(parameters.get("height"));
+                const roll        = setGameParameter(parameters.get("roll"));
+
+                let name     = parameters.get("name");
+                const parser = new DOMParser();
+                const parsed = parser.parseFromString(name, "text/html");
+                name         = parsed.body.textContent || "";
+
+                document.getElementById("name").innerHTML = name;
+
+                return {base, height, roll};
+            }
+
+            function getParameterFromForm()
+            {
+                const base   = setGameParameter(document.getElementById("input-base").value);
+                const height = setGameParameter(document.getElementById("input-height").value);
+                const roll   = setGameParameter(document.getElementById("input-roll").value);
+
+                return {base, height, roll};
+            }
+
+            function showForm(base)
+            {
+                if (base == null) {
+                    document.getElementById("new-game").hidden = false;
+                    document.getElementById("results").hidden  = true;
+                    return true;
+                }
+                return false;
+            }
+
+            function showResults(results)
+            {
+                if (Array.isArray(results)) {
+                    results = results.map(function (result) {
+                        return `<span id="value" class="w3-tag w3-margin-right w3-margin-bottom w3-round w3-card w3-round-xxlarge w3-bold w3-large w3-theme">${String(result)}</span>`;
+                    }).join("");
+                } else {
+                    results = `<div class="w3-card w3-padding w3-round">${results}</div>`;
+                }
+
+                document.getElementById("new-game").hidden    = true;
+                document.getElementById("results").hidden     = false;
+                document.getElementById("numbers").innerHTML  = results;
+                document.getElementById("explanation").hidden = false;
+                document.getElementById("loading-results").remove();
+            }
+
+            function showLoad()
+            {
+                document.getElementById("results").hidden = false;
+            }
+
+            async function draw(base, height, roll)
+            {
+                let terminal = document.getElementById("log");
+                let lottery  = new TransparentLottery(base, height, terminal);
+                let results = await lottery.draw(roll);
+                showResults(results);
+            }
+
+            function toogle(id) {
+                let element = document.getElementById(id);
+                if (element.className.indexOf("w3-show") == -1) {
+                    element.className += " w3-show";
+                } else {
+                    element.className = element.className.replace(" w3-show", "");
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", async function () {
+                const parameters = await getParameterFromURL();
+
+                if (!showForm(parameters.base)) {
+                    showLoad()
+                    await draw(parameters.base, parameters.height, parameters.roll);
+                }
+            });
+        </script>
 </head>
     <body>
         <page-root href="/" title="{{ site.title }}" description="{{ site.description }}" bitcoin-address="{{ site.bitcoin_address }}">
-            <page-session>
+            <page-session id="new-game" hidden>
                 <page-form id="form" button-text="Get results now!">
-                    <h1>Game Settings</h1>
+                    <h1>New Game</h1>
+                    <h2>Game Settings</h2>
                     <p>Configure the parameters for the draw. The results are generated based on the Bitcoin blockchain to ensure complete transparency and fairness.</p>
                     <page-form-number id="input-base" name="base" min="2" max="256" default="6" title="Game Base" description="Number of options for each game play."></page-form-number>
                     <page-form-number id="input-height" name="height" min="0" default="0" title="Bitcoin Block Height" description="Height of Bitcoin block."></page-form-number>
                     <page-form-number id="input-roll" name="roll" min="0" default="0" title="Roll Number" description="Roll applied in the draw seed number."></page-form-number>
                 </page-form>
+                <script>
+                    document.getElementById("form").addEventListener("form-execute", async function (event) {
+                        const data   = event.detail;
+                        const base   = Number(data.base);
+                        const height = Number(data.height);
+                        const roll   = Number(data.roll);
+
+                        await draw(base, height, roll);
+                    });
+                </script>
             </page-session>
-            <page-session id="results" color="dark-grey"></page-session>
+            <page-session id="results" color="white" hidden>
+                <h1 id="name"></h1>
+                <p>Check out the results of the draw below.</p>
+                <div id="loading-results">
+                    <div class="w3-show-inline-block w3-valign-middle">
+                        <page-spinner></page-spinner>
+                    </div>
+                    <div class="w3-show-inline-block w3-valign-middle w3-margin-left">
+                        Loading...
+                    </div>
+                </div>
+                <div class="w3-container w3-padding-32">
+                    <div id="numbers"></div>
+                </div>
+                <div id="explanation" class="w3-container w3-padding" hidden>
+                    <button class="w3-button w3-theme w3-round w3-small" onclick="toogle('log')">Get out results youself</button>
+                    <div id="log" class="w3-hide w3-small"></div>
+                </div>
+            </page-session>
         </page-root>
-        <script type="module">
-
-            async function draw(base, height, roll) {
-                let terminal = document.getElementById("results");
-                let lottery  = new TransparentLottery(base, height, terminal);
-                await lottery.draw(roll);
-            }
-
-            const form = document.getElementById("form").addEventListener("form-execute", async function (event) {
-                const data   = event.detail;
-                const base   = Number(data.base);
-                const height = Number(data.height);
-                const roll   = Number(data.roll);
-
-                await draw(base, height, roll);
-            });
-        </script>
     </body>
 </html>
