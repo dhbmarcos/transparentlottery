@@ -19,6 +19,7 @@
         <script src="/site/page-divider.js"></script>
         <script src="/site/page-footer.js"></script>
         <script src="/site/page-form-number.js"></script>
+        <script src="/site/page-form-text.js"></script>
         <script src="/site/page-form.js"></script>
 
         <!-- Google tag (gtag.js) -->
@@ -58,18 +59,17 @@
                 const parsed = parser.parseFromString(name, "text/html");
                 name         = parsed.body.textContent || "";
 
-                document.getElementById("name").innerHTML = name;
-
-                return {base, height, roll};
+                return {name, base, height, roll};
             }
 
             function getParameterFromForm()
             {
+                const name   = setGameParameter(document.getElementById("input-name").value);
                 const base   = setGameParameter(document.getElementById("input-base").value);
                 const height = setGameParameter(document.getElementById("input-height").value);
                 const roll   = setGameParameter(document.getElementById("input-roll").value);
 
-                return {base, height, roll};
+                return {name, base, height, roll};
             }
 
             function showForm(base)
@@ -104,8 +104,10 @@
                 document.getElementById("results").hidden = false;
             }
 
-            async function draw(base, height, roll)
+            async function draw(name, base, height, roll)
             {
+                document.getElementById("name").innerHTML = name;
+
                 let terminal = document.getElementById("log");
                 let lottery  = new TransparentLottery(base, height, terminal);
                 let results = await lottery.draw(roll);
@@ -126,7 +128,7 @@
 
                 if (!showForm(parameters.base)) {
                     showLoad()
-                    await draw(parameters.base, parameters.height, parameters.roll);
+                    await draw(parameters.name, parameters.base, parameters.height, parameters.roll);
                 }
             });
         </script>
@@ -138,6 +140,7 @@
                     <h1>New Game</h1>
                     <h2>Game Settings</h2>
                     <p>Configure the parameters for the draw. The results are generated based on the Bitcoin blockchain to ensure complete transparency and fairness.</p>
+                    <page-form-text id="input-name" name="name" title="Game Name" description="Name of the game." default="My Own Game"></page-form-text>
                     <page-form-number id="input-base" name="base" min="2" max="256" default="6" title="Game Base" description="Number of options for each game play."></page-form-number>
                     <page-form-number id="input-height" name="height" min="0" default="0" title="Bitcoin Block Height" description="Height of Bitcoin block."></page-form-number>
                     <page-form-number id="input-roll" name="roll" min="0" default="0" title="Roll Number" description="Roll applied in the draw seed number."></page-form-number>
@@ -145,11 +148,12 @@
                 <script>
                     document.getElementById("form").addEventListener("form-execute", async function (event) {
                         const data   = event.detail;
+                        const name   = data.name;
                         const base   = Number(data.base);
                         const height = Number(data.height);
                         const roll   = Number(data.roll);
 
-                        await draw(base, height, roll);
+                        await draw(name, base, height, roll);
                     });
                 </script>
             </page-session>

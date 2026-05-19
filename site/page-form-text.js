@@ -1,10 +1,10 @@
 (function ()
 {
-    class PageFormNumber extends HTMLElement
+    class PageFormText extends HTMLElement
     {
         static get observedAttributes()
         {
-            return ["name", "title", "description", "min", "max", "default", "disabled"];
+            return ["name", "title", "description", "default", "disabled"];
         }
 
         constructor()
@@ -57,29 +57,9 @@
             this.setAttribute("description", text);
         }
 
-        get min()
-        {
-            return this.getAttribute("min") || "#";
-        }
-
-        set min(number)
-        {
-            this.setAttribute("min", number);
-        }
-
-        get max()
-        {
-            return this.getAttribute("max") || "#";
-        }
-
-        set max(number)
-        {
-            this.setAttribute("max", number);
-        }
-
         get default()
         {
-            return this.getAttribute("default") || "#";
+            return this.getAttribute("default") || "";
         }
 
         set default(number)
@@ -123,8 +103,6 @@
             const name         = this.getAttribute("name");
             const title        = this.getAttribute("title") || "";
             const description  = this.getAttribute("description") || "";
-            const minValue     = this.getAttribute("min");
-            const maxValue     = this.getAttribute("max");
             const defaultValue = this.getAttribute("default");
             const isDisabled   = this.hasAttribute("disabled");
 
@@ -143,15 +121,9 @@
                     <br/>
                     <span class="w3-small">${description}</span>
                 </label>
-                <input name="${name}" type="number" class="w3-input"
+                <input name="${name}" type="text" class="w3-input"
             `;
 
-            if (minValue) {
-                content += ` min="${minValue}"`;
-            }
-            if (maxValue) {
-                content += ` max="${maxValue}"`;
-            }
             if (defaultValue) {
                 content += ` value="${defaultValue}"`;
             }
@@ -164,5 +136,5 @@
             this._shadowRoot.innerHTML = content;
         }
     }
-    customElements.define("page-form-number", PageFormNumber);
+    customElements.define("page-form-text", PageFormText);
 })();

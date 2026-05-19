@@ -46,7 +46,7 @@
             const payload = {};
 
             elements.forEach(function (element) {
-                if (element.tagName.toLowerCase() === 'page-form-number') {
+                if (element.tagName.toLowerCase() === 'page-form-number' || element.tagName.toLowerCase() === 'page-form-text') {
                     const key   = element.name;
                     const value = element.value;
 
