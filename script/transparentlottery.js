@@ -2,6 +2,10 @@ class TransparentLottery
 {
     constructor(base, height=undefined, terminal=undefined)
     {
+
+        this._minned            = false;
+        this._estimate_terminal = document.createElement("div");
+
         /* Base */
         if (!Number.isInteger(base)) {
             throw `Base paramenter must be an integer, not ${typeof base}.`;
@@ -12,8 +16,8 @@ class TransparentLottery
         this._base = base;
 
         /* Height */
-            if (height < 0) {
-                throw `Height paramenter must be greater than or equal to 0, not ${height}.`;
+        if (height < 0) {
+            throw `Height paramenter must be greater than or equal to 0, not ${height}.`;
         }
         this._height = height;
 
@@ -67,7 +71,8 @@ class TransparentLottery
             const data      = await response.json();
             const timestamp = data.timestamp;
             this._instant   = new Date(timestamp * 1000).toISOString();
-            this.logTerminal(`It was mined at ${this._instant}.`)
+            this._minned    = true;
+            this.logTerminal(`It was mined at ${this._instant}.`);
 
         } catch (error) {
             return this.logTerminal(`<samp>${error}</samp>`);
@@ -101,10 +106,13 @@ class TransparentLottery
         const seconds = deltaBlocks * interval;
         const date    = new Date((currentTimestamp + seconds) * 1000);
 
-        this.logTerminal(`The block <code>${this._height}</code> is not mined yet.`);
-        this.logTerminal(`Current block is <code>${currentHeight}</code>.`);
-        this.logTerminal(`Please, wait mining and return back later.`);
-        this.logTerminal(`Draw estimation:<b>${date.toISOString()}</b>, considering an average of <code>${(interval / 60).toFixed(2)} minute/block</code>.`);
+        this._estimate_terminal  = "";
+        this._estimate_terminal += `<p>The block <code>${this._height}</code> is not mined yet.</p>`;
+        this._estimate_terminal += `<p>Current block is <code>${currentHeight}</code>.</p>`;
+        this._estimate_terminal += `<p>Please, wait mining and return back later.</p>`;
+        this._estimate_terminal += `<p>Draw estimation:<b>${date.toISOString()}</b>, considering an average of <code>${(interval / 60).toFixed(2)} minute/block</code></p>`;
+
+        this.logTerminal(this._estimate_terminal);
 
         this._seed    = null;
         this._instant = date.toISOString();
@@ -166,6 +174,11 @@ class TransparentLottery
         }
     }
 
+    get minned()
+    {
+        return this._minned;
+    }
+
     logTerminal(message)
     {
         if (this._terminal) {
@@ -198,6 +211,11 @@ class TransparentLottery
 
         if (!this._seed) {
             await this._getSeed()
+
+            if (!this.minned) {
+                return this._estimate_terminal;
+            }
+
             this.logTerminal(`<b>Draw Rool Number 0</b> is the <b>Seed Draw Number</b>: <code>${this._seed}</code>.`);
         }
         let hash = this._seed;
