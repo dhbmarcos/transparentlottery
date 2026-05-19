@@ -56,7 +56,7 @@
                 let name          = parameters.get("name");
 
                 if (name) {
-                    name = name.replace(/<\/?[^>]+(>|$)/g, "") || "";
+                    name = name.replace(/<[^>]*>/g, "") || "";
                 }
 
                 return {name, base, height, roll};

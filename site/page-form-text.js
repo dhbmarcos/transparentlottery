@@ -62,9 +62,9 @@
             return this.getAttribute("default") || "";
         }
 
-        set default(number)
+        set default(text)
         {
-            this.setAttribute("default", number);
+            this.setAttribute("default", text.replace(/<[^>]*>/g, ""));
         }
 
         get value()
@@ -73,14 +73,15 @@
             if (!input) {
                 return this.getAttribute("default");
             }
-            return input.value;
+
+            return input.value.replace(/<[^>]*>/g, "");
         }
 
-        set value(number)
+        set value(text)
         {
             const input = this._shadowRoot.querySelector("input");
             if (input) {
-                input.value = number;
+                input.value = text.replace(/<[^>]*>/g, "");
             }
         }
 
@@ -108,10 +109,6 @@
 
             if (!name) {
                 throw `Invalid input name attribute: ${name}`;
-            }
-
-            if (name) {
-                name = name.replace(/<\/?[^>]+(>|$)/g, "") || "";
             }
 
             let content =`
