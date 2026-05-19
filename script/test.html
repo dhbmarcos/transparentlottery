@@ -207,6 +207,12 @@
             throw new result("FAILED", "Get Draw Numbers failed!");
         }
     }
+    await testerDraw.draw(null);
+    for (let drawNumber = 0; drawNumber < drawNumbers.length; drawNumber++) {
+        if (drawNumbers[drawNumber] != drawNumbersReference[drawNumber]) {
+            throw new result("FAILED", "Get Draw Numbers failed!");
+        }
+    }
     result("OK", "Get Draw Numbers");
 
     /* Done */

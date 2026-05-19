@@ -12,13 +12,8 @@ class TransparentLottery
         this._base = base;
 
         /* Height */
-        if (height !== undefined) {
-            if (!Number.isInteger(height)) {
-                throw `Height paramenter must be an integer, not ${typeof height}.`;
-            }
             if (height < 0) {
                 throw `Height paramenter must be greater than or equal to 0, not ${height}.`;
-            }
         }
         this._height = height;
 
@@ -187,6 +182,9 @@ class TransparentLottery
     async draw(roll=0)
     {
         /* Roll */
+        if (roll == null) {
+            roll = 0;
+        }
         if (!Number.isInteger(roll)) {
             throw `Roll paramenter must be an integer, not ${typeof roll}.`;
         }
