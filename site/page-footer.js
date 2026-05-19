@@ -98,7 +98,7 @@
                     </div>
                     <div class="w3-container">
                         <div class="w3-bar">
-                            <a class="w3-bar-item w3-button" onclick="document.getElementById('donation').style.display='block'">Help us</a>
+                            <a class="w3-bar-item w3-button" href="https://github.com/dhbmarcos/transparentlottery">View on GitHub</a>
                         </div>
                     </div>
                     <p class="w3-tiny">
