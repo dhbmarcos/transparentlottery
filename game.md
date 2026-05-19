@@ -1,4 +1,4 @@
 ---
 layout: game
-title: Lottery Game
+title: Make Your Own Game
 ---

@@ -107,10 +107,11 @@
             async function draw(name, base, height, roll)
             {
                 if (!name || name == null || name == "null") {
-                    name = "Transparent Lottery Game";
+                    name = "A Game";
                 }
 
                 document.getElementById("name").innerHTML = name;
+                document.title = `${name} using Transparent Lottery`;
 
                 let terminal = document.getElementById("log");
                 let lottery  = new TransparentLottery(base, height, terminal);
