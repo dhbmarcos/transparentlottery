@@ -46,7 +46,7 @@
                 return parameter;
             }
 
-            async function getParameterFromURL()
+            function getParameterFromURL()
             {
                 const queryString = window.location.search;
                 const parameters  = new URLSearchParams(queryString);
@@ -82,6 +82,35 @@
                 return false;
             }
 
+            function setURL()
+            {
+                let parameters = getParameterFromURL();
+                if (parameters.name == null && parameters.base == null && parameters.height == null && parameters.roll == null) {
+                    parameters = getParameterFromForm();
+                }
+                if (parameters.name == null && parameters.base == null && parameters.height == null && parameters.roll == null) {
+                    return null;
+                }
+
+                let parts = [];
+                let url   = new URL(window.location.href).origin;
+
+                if (parameters.name) {
+                    parts.push(`name=${encodeURIComponent(parameters.name)}`);
+                }
+                if (parameters.base) {
+                    parts.push(`base=${parameters.base}`);
+                }
+                if (parameters.height) {
+                    parts.push(`height=${parameters.height}`);
+                }
+                if (parameters.roll) {
+                    parts.push(`roll=${parameters.roll}`);
+                }
+
+                return `${url}/game?${parts.join("&")}`;
+            }
+
             function showResults(results)
             {
                 if (Array.isArray(results)) {
@@ -97,6 +126,12 @@
                 document.getElementById("numbers").innerHTML  = results;
                 document.getElementById("explanation").hidden = false;
                 document.getElementById("loading-results").remove();
+
+                const url = setURL();
+                if (url !== null) {
+                    document.getElementById("link").hidden        = false;
+                    document.getElementById("link-url").innerHTML = url;
+                }
             }
 
             function showLoad()
@@ -176,6 +211,27 @@
                 <div class="w3-container w3-padding-32">
                     <div id="numbers"></div>
                 </div>
+                <div id="link" class="w3-container w3-padding-32">
+                    <h2>Share the results with your friends!</h2>
+                    <code id="link-url"></code>
+                    <button id="link-button" class="w3-button w3-theme w3-round w3-tiny">Copy link</button>
+                </div>
+                <script>
+                    document.getElementById("link-button").addEventListener("click", async function() {
+                        const url = setURL();
+                        if (url == null) {
+                            document.getElementById("link").hidden = true;
+                            return;
+                        }
+                        await navigator.clipboard.writeText(url);
+                        document.getElementById("link-button").innerHTML = "Copied!";
+
+                        setTimeout(() => {
+                            document.getElementById("link-button").innerHTML = "Copy link";
+                        }, 5000);
+                    });
+                </script>
+
                 <div id="explanation" class="w3-container w3-padding" hidden>
                     <button class="w3-button w3-theme w3-round w3-small" onclick="toogle('log')">Get out results youself</button>
                     <div id="log" class="w3-hide w3-small"></div>
