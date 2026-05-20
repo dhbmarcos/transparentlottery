@@ -10,10 +10,34 @@
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
                 <link rel="stylesheet" href="/site/w3-webcomponents.css">
 
+                <style>
+                    /* Container principal que delimita a área do divider */
+                    .divider-container {
+                        position: relative;
+                        width: 100%;
+                        height: 185px; /* Define a altura fixa da sessão */
+                        overflow: hidden;
+                    }
+                    /* Força o SVG a atuar como um background css-like */
+                    .divider-bg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 0;
+                        pointer-events: none; /* Previne interação com o SVG */
+                    }
+                    /* Container para qualquer conteúdo futuro sobreposto ao background */
+                    .divider-content {
+                        position: relative;
+                        z-index: 1;
+                    }
+                </style>
+
                 <div class="w3-padding-16 w3-center w3-white"></div>
-                <div class="w3-padding-16 w3-center w3-white">
-                    <svg width="1595px" height="185px" viewBox="0 0 1595 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+                <div class="divider-container w3-white">
+                    <svg class="divider-bg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1595 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>ver 3 Footer bg</title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
@@ -77,8 +101,11 @@
                             </g>
                         </g>
                     </svg>
+                    <div class="divider-content w3-padding-16 w3-center">
+                        <slot></slot>
+                    </div>
                 </div>
-                `;
+            `;
         }
     }
     customElements.define("page-divider", PageDivider);
