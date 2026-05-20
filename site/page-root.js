@@ -77,11 +77,15 @@
 
             window.addEventListener("load", () => {
                 const loading = this._shadowRoot.getElementById("loading");
-                loading.classList.add("fade-out");
-                loading.addEventListener("transitionend", function () {
+                loading?.classList.add("fade-out");
+                loading?.addEventListener("transitionend", function () {
                     this.remove();
                 });
             });
+
+            window.setTimeout(() => {
+                this._shadowRoot.getElementById("loading")?.remove();
+            }, 5000)
         }
 
         render()
