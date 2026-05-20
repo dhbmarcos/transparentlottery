@@ -20,9 +20,33 @@
                 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
                 <link rel="stylesheet" href="/site/w3-webcomponents.css">
 
-                <footer class="w3-container w3-center w3-black">
-                    <svg width="1595px" height="185px" viewBox="0 0 1595 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+                <style>
+                    /* Container principal do rodapé */
+                    .footer-wrapper {
+                        position: relative;
+                        width: 100%;
+                        overflow: hidden;
+                    }
+                    /* Configuração do SVG como background responsivo */
+                    .footer-bg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 0;
+                        pointer-events: none;
+                    }
+                    /* Garante que o conteúdo textual e links fiquem clicáveis e acima do fundo */
+                    .footer-content {
+                        position: relative;
+                        z-index: 1;
+                        width: 100%;
+                    }
+                </style>
+
+                <footer class="footer-wrapper w3-black">
+                    <svg class="footer-bg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1595 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>ver 3 Footer bg</title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
@@ -86,26 +110,28 @@
                             </g>
                         </g>
                     </svg>
-                    <div class="w3-container w3-center w3-padding-64"></div>
-                    <div class="w3-container">
-                        <div class="w3-bar">
-                            <a class="w3-bar-item w3-button w3-text-theme w3-large" href="${href}">
-                                <b>${title}</b>
-                            </a>
-                            <span class="w3-bar-item">${description}</span>
+
+                    <div class="footer-content w3-center">
+                        <div class="w3-container w3-padding-64"></div>
+                        <div class="w3-container">
+                            <div class="w3-bar">
+                                <a class="w3-bar-item w3-button w3-text-theme w3-large" href="${href}">
+                                    <b>${title}</b>
+                                </a>
+                                <span class="w3-bar-item">${description}</span>
+                            </div>
+                            <page-menu></page-menu>
                         </div>
-                        <page-menu></page-menu>
-                    </div>
-                    <div class="w3-container">
-                        <div class="w3-bar">
-                            <a class="w3-bar-item w3-button" href="https://github.com/dhbmarcos/transparentlottery">View on GitHub</a>
+                        <div class="w3-container">
+                            <div class="w3-bar">
+                                <a class="w3-bar-item w3-button" href="https://github.com/dhbmarcos/transparentlottery">View on GitHub</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="w3-tiny">
-                        Copyright (c) ${date} D. H. B. Marcos.
-                        <br>
-                        Deo omnis gloria.
-                    </p>
+                        <p class="w3-tiny">
+                            Copyright (c) ${date} D. H. B. Marcos.
+                            <br>
+                            Deo omnis gloria.
+                        </p>
                     </div>
                 </footer>
                 <div class="w3-container w3-center w3-padding-64"></div>
