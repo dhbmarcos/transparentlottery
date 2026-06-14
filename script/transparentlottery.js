@@ -205,7 +205,7 @@ class TransparentLottery
             throw `Roll paramenter must be greater than or equal to 0, not ${roll}.`;
         }
 
-        if (!this._height) {
+        if (this._height === undefined || this._height === null) {
             await this._getCurrentHeight();
         }
 

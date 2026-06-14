@@ -85,7 +85,7 @@
 
             window.setTimeout(() => {
                 this._shadowRoot.getElementById("loading")?.remove();
-            }, 5000)
+            }, 5000);
         }
 
         render()
